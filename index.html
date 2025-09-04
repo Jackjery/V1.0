@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <!-- Tailwind 配置 -->
@@ -182,6 +183,14 @@
                     <option value="month">按月</option>
                     <option value="quarter">按季度</option>
                 </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="flex items-center">
+                    <input type="checkbox" id="showDataLabels" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                    <span class="ml-2 text-sm font-medium text-gray-700">显示数据标签</span>
+                </label>
+                <p class="text-xs text-gray-500 mt-1">在图表上直接显示数据点的数值</p>
             </div>
 
             <button id="generateChart" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors">
@@ -882,6 +891,9 @@
             }
         }
 
+        // 注册Chart.js数据标签插件
+        Chart.register(ChartDataLabels);
+
         document.addEventListener('DOMContentLoaded', function() {
             // 获取当前系统日期
             const today = new Date();
@@ -954,6 +966,7 @@
                 this.startDate = document.getElementById('startDate');
                 this.endDate = document.getElementById('endDate');
                 this.groupBy = document.getElementById('groupBy');
+                this.showDataLabels = document.getElementById('showDataLabels');
                 this.generateChart = document.getElementById('generateChart');
                 this.configGroupingBtn = document.getElementById('configGroupingBtn');
                 
@@ -1030,6 +1043,14 @@
                 
                 // 生成图表按钮
                 this.generateChart.addEventListener('click', () => this.generateStatistics());
+                
+                // 数据标签复选框变化事件
+                this.showDataLabels.addEventListener('change', () => {
+                    if (this.chart) {
+                        // 重新生成图表以应用数据标签设置
+                        this.generateStatistics();
+                    }
+                });
                 
                 // 周期配置相关事件
                 this.configGroupingBtn.addEventListener('click', () => this.openGroupingConfig());
@@ -1546,6 +1567,9 @@
                 const failureCounts = stats.map(stat => stat.failureCount);
                 const successRates = stats.map(stat => parseFloat(stat.successRate.toFixed(3)));
                 
+                // 检查是否显示数据标签
+                const showLabels = this.showDataLabels.checked;
+                
                 // 创建图表
                 const ctx = this.dataChart.getContext('2d');
                 
@@ -1638,6 +1662,30 @@
                                         return label;
                                     }
                                 }
+                            },
+                            datalabels: {
+                                display: showLabels,
+                                color: function(context) {
+                                    // 根据不同数据集使用不同颜色
+                                    const colors = ['#165DFF', '#F53F3F', '#00B42A'];
+                                    return colors[context.datasetIndex] || '#000000';
+                                },
+                                font: {
+                                    size: 10,
+                                    weight: 'bold'
+                                },
+                                formatter: function(value, context) {
+                                    if (context.datasetIndex === 2) {
+                                        return value + '%';
+                                    }
+                                    return value;
+                                },
+                                anchor: 'end',
+                                align: function(context) {
+                                    // 成功率数据标签在右侧，其他在左侧
+                                    return context.datasetIndex === 2 ? 'start' : 'end';
+                                },
+                                offset: 4
                             }
                         }
                     }
