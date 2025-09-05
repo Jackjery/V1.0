@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
     <!-- Tailwind 配置 -->
     <script>
@@ -318,6 +319,10 @@
                 
                 <!-- 测站名称筛选（图表专用） -->
                 <div class="mb-4 border-b border-gray-100 pb-4">
+                    <div class="mb-2 p-2 bg-blue-50 rounded text-xs text-blue-700">
+                        <i class="fa fa-info-circle mr-1"></i>
+                        此筛选基于顶部筛选结果进行二次筛选，选择后自动更新图表
+                    </div>
                     <div class="dropdown-container">
                         <label class="block text-sm font-medium text-gray-700 mb-1">测站名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
                         <div class="flex items-center justify-between filter-select cursor-pointer" id="stationChartDropdown">
@@ -368,6 +373,10 @@
                 
                 <!-- 客户名称筛选（图表专用） -->
                 <div class="mb-4 border-b border-gray-100 pb-4">
+                    <div class="mb-2 p-2 bg-blue-50 rounded text-xs text-blue-700">
+                        <i class="fa fa-info-circle mr-1"></i>
+                        此筛选基于顶部筛选结果进行二次筛选，选择后自动更新图表
+                    </div>
                     <div class="dropdown-container">
                         <label class="block text-sm font-medium text-gray-700 mb-1">客户名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
                         <div class="flex items-center justify-between filter-select cursor-pointer" id="customerChartDropdown">
@@ -935,21 +944,56 @@
                 const currentState = this.labelsVisible[chartId] || false;
                 this.labelsVisible[chartId] = !currentState;
 
-                // 更新图表配置
-                chart.options.plugins.datalabels = {
-                    display: !currentState,
-                    anchor: 'end',
-                    align: 'top',
-                    color: '#333',
-                    font: {
-                        size: 10,
-                        weight: 'normal'
-                    },
-                    formatter: (value) => value > 0 ? value : ''
-                };
+                // 更新图表的全局datalabels配置
+                if (!currentState) {
+                    // 显示数据标签
+                    chart.options.plugins.datalabels = {
+                        display: function(context) {
+                            // 只显示数值大于0的标签
+                            return context.parsed.y > 0;
+                        },
+                        anchor: 'end',
+                        align: function(context) {
+                            // 根据数值大小调整位置，避免重叠
+                            const value = context.parsed.y;
+                            return value > 10 ? 'top' : 'bottom';
+                        },
+                        offset: 4,
+                        color: function(context) {
+                            // 使用与线条相同的颜色
+                            return context.dataset.borderColor;
+                        },
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        borderColor: function(context) {
+                            return context.dataset.borderColor;
+                        },
+                        borderWidth: 1,
+                        borderRadius: 3,
+                        padding: {
+                            top: 2,
+                            right: 4,
+                            bottom: 2,
+                            left: 4
+                        },
+                        font: {
+                            size: 10,
+                            weight: 'bold',
+                            family: 'Arial'
+                        },
+                        formatter: function(value, context) {
+                            // 格式化显示的数值
+                            return value > 0 ? value.toString() : '';
+                        }
+                    };
+                } else {
+                    // 隐藏数据标签
+                    chart.options.plugins.datalabels = {
+                        display: false
+                    };
+                }
 
                 // 重新渲染图表
-                chart.update('none');
+                chart.update('active');
                 
                 return !currentState;
             }
@@ -983,7 +1027,11 @@
                     fill: false,
                     pointBackgroundColor: this.colors[i % this.colors.length],
                     pointRadius: 4,
-                    pointHoverRadius: 6
+                    pointHoverRadius: 6,
+                    // 初始状态下隐藏数据标签
+                    datalabels: {
+                        display: false
+                    }
                 }));
 
                 const chart = new Chart(ctx, {
@@ -992,6 +1040,7 @@
                         labels: xLabels,
                         datasets: styledDatasets
                     },
+                    plugins: [ChartDataLabels], // 注册数据标签插件
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
@@ -1021,6 +1070,10 @@
                                         return `${context.dataset.label}: ${context.raw} 次`;
                                     }
                                 }
+                            },
+                            // 全局datalabels配置（默认关闭）
+                            datalabels: {
+                                display: false
                             }
                         },
                         scales: {
@@ -1941,7 +1994,11 @@
 
             // 图表专用刷新方法
             refreshStationChart() {
-                if (!this.filteredData || !this.filteredData.length) return;
+                // 如果没有应用过顶部筛选，提示用户先应用筛选
+                if (!this.filteredData || !this.filteredData.length) {
+                    alert('请先在页面顶部点击"应用筛选并生成图表"，然后再使用图表专用筛选功能。');
+                    return;
+                }
                 
                 const groupBy = document.getElementById('groupBy').value;
                 const selectedStations = this.stationChartSelect.getSelectedValues();
@@ -1958,7 +2015,11 @@
             }
 
             refreshCustomerChart() {
-                if (!this.filteredData || !this.filteredData.length) return;
+                // 如果没有应用过顶部筛选，提示用户先应用筛选
+                if (!this.filteredData || !this.filteredData.length) {
+                    alert('请先在页面顶部点击"应用筛选并生成图表"，然后再使用图表专用筛选功能。');
+                    return;
+                }
                 
                 const groupBy = document.getElementById('groupBy').value;
                 const selectedCustomers = this.customerChartSelect.getSelectedValues();
