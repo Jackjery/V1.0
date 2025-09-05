@@ -303,8 +303,8 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>测站名称趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleStationLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏数据标签">
-                            <i class="fa fa-tag mr-1"></i>数据标签
+                        <button id="toggleStationLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏时间点数值标签">
+                            <i class="fa fa-tag mr-1"></i>时间点数值
                         </button>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="stationChart" data-type="image" title="下载图表图片">
@@ -353,8 +353,8 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>客户名称趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleCustomerLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏数据标签">
-                            <i class="fa fa-tag mr-1"></i>数据标签
+                        <button id="toggleCustomerLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏时间点数值标签">
+                            <i class="fa fa-tag mr-1"></i>时间点数值
                         </button>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="customerChart" data-type="image" title="下载图表图片">
@@ -403,8 +403,8 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>卫星名称趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleSatelliteLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏数据标签">
-                            <i class="fa fa-tag mr-1"></i>数据标签
+                        <button id="toggleSatelliteLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏时间点数值标签">
+                            <i class="fa fa-tag mr-1"></i>时间点数值
                         </button>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="satelliteChart" data-type="image" title="下载图表图片">
@@ -416,6 +416,26 @@
                         </button>
                     </div>
                 </h3>
+                
+                <!-- 卫星名称筛选（图表专用） -->
+                <div class="mb-4">
+                    <div class="grid grid-cols-1 gap-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">卫星名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
+                        <div class="flex items-center justify-between filter-select cursor-pointer" id="satelliteChartDropdown">
+                            <span class="text-gray-600" id="satelliteChartPlaceholder">请选择卫星名称（可多选）</span>
+                            <i class="fa fa-chevron-down text-gray-400"></i>
+                        </div>
+                        <div class="selected-tags" id="satelliteChartTags"></div>
+                        <div class="dropdown-content hidden" id="satelliteChartOptions">
+                            <div class="p-2">
+                                <input type="text" placeholder="搜索卫星..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                       id="satelliteChartSearch">
+                            </div>
+                            <div id="satelliteChartList"></div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="chart-container">
                     <canvas id="satelliteChart"></canvas>
                     <div class="absolute inset-0 flex items-center justify-center text-gray-500 hidden" id="satelliteChartEmpty">
@@ -431,8 +451,8 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>任务结果状态趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleStatusLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏数据标签">
-                            <i class="fa fa-tag mr-1"></i>数据标签
+                        <button id="toggleStatusLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏时间点数值标签">
+                            <i class="fa fa-tag mr-1"></i>时间点数值
                         </button>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="statusChart" data-type="image" title="下载图表图片">
@@ -444,6 +464,26 @@
                         </button>
                     </div>
                 </h3>
+                
+                <!-- 任务结果状态筛选（图表专用） -->
+                <div class="mb-4">
+                    <div class="grid grid-cols-1 gap-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">任务结果状态筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
+                        <div class="flex items-center justify-between filter-select cursor-pointer" id="statusChartDropdown">
+                            <span class="text-gray-600" id="statusChartPlaceholder">请选择任务结果状态（可多选）</span>
+                            <i class="fa fa-chevron-down text-gray-400"></i>
+                        </div>
+                        <div class="selected-tags" id="statusChartTags"></div>
+                        <div class="dropdown-content hidden" id="statusChartOptions">
+                            <div class="p-2">
+                                <input type="text" placeholder="搜索状态..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                       id="statusChartSearch">
+                            </div>
+                            <div id="statusChartList"></div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="chart-container">
                     <canvas id="statusChart"></canvas>
                     <div class="absolute inset-0 flex items-center justify-center text-gray-500 hidden" id="statusChartEmpty">
@@ -459,8 +499,8 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>任务类型趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleTypeLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏数据标签">
-                            <i class="fa fa-tag mr-1"></i>数据标签
+                        <button id="toggleTypeLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="显示/隐藏时间点数值标签">
+                            <i class="fa fa-tag mr-1"></i>时间点数值
                         </button>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="typeChart" data-type="image" title="下载图表图片">
@@ -472,6 +512,26 @@
                         </button>
                     </div>
                 </h3>
+                
+                <!-- 任务类型筛选（图表专用） -->
+                <div class="mb-4">
+                    <div class="grid grid-cols-1 gap-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">任务类型筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
+                        <div class="flex items-center justify-between filter-select cursor-pointer" id="typeChartDropdown">
+                            <span class="text-gray-600" id="typeChartPlaceholder">请选择任务类型（可多选）</span>
+                            <i class="fa fa-chevron-down text-gray-400"></i>
+                        </div>
+                        <div class="selected-tags" id="typeChartTags"></div>
+                        <div class="dropdown-content hidden" id="typeChartOptions">
+                            <div class="p-2">
+                                <input type="text" placeholder="搜索类型..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                       id="typeChartSearch">
+                            </div>
+                            <div id="typeChartList"></div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="chart-container">
                     <canvas id="typeChart"></canvas>
                     <div class="absolute inset-0 flex items-center justify-center text-gray-500 hidden" id="typeChartEmpty">
@@ -941,40 +1001,92 @@
                     // 显示数据标签
                     chart.options.plugins.datalabels = {
                         display: function(context) {
-                            // 只显示数值大于0的标签
-                            return context.parsed.y > 0;
+                            // 显示所有数据点的标签
+                            return true;
                         },
-                        anchor: 'end',
-                        align: function(context) {
-                            // 根据数值大小调整位置，避免重叠
+                        anchor: function(context) {
                             const value = context.parsed.y;
-                            return value > 10 ? 'top' : 'bottom';
+                            const maxValue = Math.max(...context.chart.data.datasets.map(dataset => 
+                                Math.max(...dataset.data.filter(d => d !== null && d !== undefined))
+                            ));
+                            // 根据数值相对大小调整锚点位置
+                            return value > maxValue * 0.7 ? 'end' : 'start';
                         },
-                        offset: 4,
+                        align: function(context) {
+                            const value = context.parsed.y;
+                            const maxValue = Math.max(...context.chart.data.datasets.map(dataset => 
+                                Math.max(...dataset.data.filter(d => d !== null && d !== undefined))
+                            ));
+                            // 智能定位避免重叠
+                            if (value > maxValue * 0.7) {
+                                return 'top';
+                            } else if (value < maxValue * 0.3) {
+                                return 'bottom';
+                            } else {
+                                return context.dataIndex % 2 === 0 ? 'top' : 'bottom';
+                            }
+                        },
+                        offset: function(context) {
+                            const value = context.parsed.y;
+                            const maxValue = Math.max(...context.chart.data.datasets.map(dataset => 
+                                Math.max(...dataset.data.filter(d => d !== null && d !== undefined))
+                            ));
+                            // 根据数值大小调整偏移距离
+                            return value > maxValue * 0.7 ? 8 : 4;
+                        },
                         color: function(context) {
-                            // 使用与线条相同的颜色
-                            return context.dataset.borderColor;
+                            // 使用与数据点相同的颜色，但更深一些以提高可读性
+                            const originalColor = context.dataset.borderColor;
+                            return originalColor.replace(')', ', 0.8)').replace('rgb', 'rgba');
                         },
-                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        backgroundColor: function(context) {
+                            const value = context.parsed.y;
+                            // 为0值使用半透明背景，非0值使用白色背景
+                            return value === 0 ? 'rgba(248, 248, 248, 0.8)' : 'rgba(255, 255, 255, 0.95)';
+                        },
                         borderColor: function(context) {
                             return context.dataset.borderColor;
                         },
                         borderWidth: 1,
-                        borderRadius: 3,
+                        borderRadius: 4,
                         padding: {
-                            top: 2,
-                            right: 4,
-                            bottom: 2,
-                            left: 4
+                            top: 3,
+                            right: 5,
+                            bottom: 3,
+                            left: 5
                         },
                         font: {
-                            size: 10,
-                            weight: 'bold',
-                            family: 'Arial'
+                            size: function(context) {
+                                const value = context.parsed.y;
+                                // 根据数值大小调整字体大小
+                                return value === 0 ? 9 : 11;
+                            },
+                            weight: function(context) {
+                                const value = context.parsed.y;
+                                return value === 0 ? 'normal' : 'bold';
+                            },
+                            family: 'system-ui, -apple-system, sans-serif'
                         },
                         formatter: function(value, context) {
-                            // 格式化显示的数值
-                            return value > 0 ? value.toString() : '';
+                            const timeLabel = context.chart.data.labels[context.dataIndex];
+                            const seriesName = context.dataset.label;
+                            
+                            // 格式化显示：数值 + 时间点信息
+                            if (value === 0) {
+                                return '0';
+                            } else {
+                                return `${value}\n(${timeLabel})`;
+                            }
+                        },
+                        textAlign: 'center',
+                        // 鼠标悬停时突出显示
+                        listeners: {
+                            enter: function(context) {
+                                context.element.style.backgroundColor = 'rgba(22, 93, 255, 0.1)';
+                            },
+                            leave: function(context) {
+                                context.element.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                            }
                         }
                     };
                 } else {
@@ -1057,10 +1169,35 @@
                             tooltip: {
                                 mode: 'index',
                                 intersect: false,
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: 'white',
+                                bodyColor: 'white',
+                                borderColor: '#165DFF',
+                                borderWidth: 2,
+                                cornerRadius: 6,
+                                displayColors: true,
                                 callbacks: {
+                                    title: function(tooltipItems) {
+                                        const timeLabel = tooltipItems[0].label;
+                                        return `时间点: ${timeLabel}`;
+                                    },
                                     label: function(context) {
-                                        return `${context.dataset.label}: ${context.raw} 次`;
+                                        const seriesName = context.dataset.label;
+                                        const value = context.raw;
+                                        const timeLabel = context.label;
+                                        
+                                        // 显示系列名称、数值和时间信息
+                                        return `${seriesName}: ${value} 次`;
+                                    },
+                                    footer: function(tooltipItems) {
+                                        // 计算该时间点的总数
+                                        const total = tooltipItems.reduce((sum, item) => sum + item.raw, 0);
+                                        return total > 0 ? `总计: ${total} 次` : '';
                                     }
+                                },
+                                // 自定义排序，让数值大的显示在前面
+                                itemSort: function(a, b) {
+                                    return b.raw - a.raw;
                                 }
                             },
                             // 全局datalabels配置（默认关闭）
@@ -1492,6 +1629,24 @@
                     'customerChartValue', 'customerChartTags', 'customerChartSearch', 'selectAllCustomerChart',
                     (values) => this.generateCustomerChartWithFilter()
                 );
+
+                this.satelliteChartSelect = new MultiSelectDropdown(
+                    'satelliteChartDropdown', 'satelliteChartOptions', 'satelliteChartDisplay',
+                    'satelliteChartValue', 'satelliteChartTags', 'satelliteChartSearch', 'selectAllSatelliteChart',
+                    (values) => this.generateSatelliteChartWithFilter()
+                );
+
+                this.statusChartSelect = new MultiSelectDropdown(
+                    'statusChartDropdown', 'statusChartOptions', 'statusChartDisplay',
+                    'statusChartValue', 'statusChartTags', 'statusChartSearch', 'selectAllStatusChart',
+                    (values) => this.generateStatusChartWithFilter()
+                );
+
+                this.typeChartSelect = new MultiSelectDropdown(
+                    'typeChartDropdown', 'typeChartOptions', 'typeChartDisplay',
+                    'typeChartValue', 'typeChartTags', 'typeChartSearch', 'selectAllTypeChart',
+                    (values) => this.generateTypeChartWithFilter()
+                );
             }
 
             async init() {
@@ -1680,6 +1835,15 @@
                 // 初始化图表专用筛选
                 this.stationChartSelect.setOptions(stationOptions);
                 this.customerChartSelect.setOptions(customerOptions);
+                
+                // 为其他图表也初始化筛选选项
+                const satelliteOptions = this.filterValues['卫星名称'].map(satellite => ({ value: satellite, label: satellite }));
+                const statusOptions = this.filterValues['任务结果状态'].map(status => ({ value: status, label: status }));
+                const typeOptions = this.filterValues['任务类型'].map(type => ({ value: type, label: type }));
+                
+                this.satelliteChartSelect.setOptions(satelliteOptions);
+                this.statusChartSelect.setOptions(statusOptions);
+                this.typeChartSelect.setOptions(typeOptions);
 
                 if (this.filterValues['客户名称'].length === 0 && this.data.some(item => item[FIELD_MAPPING['客户名称']])) {
                     document.getElementById('dataStructureAlert').classList.remove('hidden');
@@ -1984,25 +2148,32 @@
                 return chart;
             }
 
-            // 图表专用筛选和生成方法
+            // 图表专用筛选和生成方法 - 使用顶部完整筛选条件
             generateStationChartWithFilter() {
                 if (!this.data || !this.data.length) return;
                 
-                // 获取筛选条件（平级筛选，使用全部原始数据）
+                // 获取顶部筛选的所有条件
                 const startInput = document.getElementById('startDate').value;
                 const endInput = document.getElementById('endDate').value;
                 const groupBy = document.getElementById('groupBy').value;
+                const stationValues = this.stationSelect.getSelectedValues();
+                const customerValues = this.customerSelect.getSelectedValues();
+                const satelliteValues = this.satelliteSelect.getSelectedValues();
+                const statusValues = this.statusSelect.getSelectedValues();
+                const typeValues = this.typeSelect.getSelectedValues();
+                
+                // 获取图表专用的测站筛选
                 const selectedStations = this.stationChartSelect.getSelectedValues();
                 
-                // 应用完整的筛选逻辑（与顶部筛选相同的逻辑）
+                // 应用完整的筛选逻辑，但如果图表专用筛选有值，则覆盖顶部测站筛选
                 const filteredData = this.applyFiltersToData(this.data, {
                     startDate: startInput,
                     endDate: endInput,
-                    stations: selectedStations,
-                    customers: [], // 测站图表不限制客户
-                    satellites: [],
-                    statuses: [],
-                    types: []
+                    stations: selectedStations.length > 0 ? selectedStations : stationValues,
+                    customers: customerValues,
+                    satellites: satelliteValues,
+                    statuses: statusValues,
+                    types: typeValues
                 });
                 
                 this.generateCategoryChartFromData('stationChart', '测站名称趋势分析', '测站名称', groupBy, filteredData);
@@ -2011,24 +2182,121 @@
             generateCustomerChartWithFilter() {
                 if (!this.data || !this.data.length) return;
                 
-                // 获取筛选条件（平级筛选，使用全部原始数据）
+                // 获取顶部筛选的所有条件
                 const startInput = document.getElementById('startDate').value;
                 const endInput = document.getElementById('endDate').value;
                 const groupBy = document.getElementById('groupBy').value;
+                const stationValues = this.stationSelect.getSelectedValues();
+                const customerValues = this.customerSelect.getSelectedValues();
+                const satelliteValues = this.satelliteSelect.getSelectedValues();
+                const statusValues = this.statusSelect.getSelectedValues();
+                const typeValues = this.typeSelect.getSelectedValues();
+                
+                // 获取图表专用的客户筛选
                 const selectedCustomers = this.customerChartSelect.getSelectedValues();
                 
-                // 应用完整的筛选逻辑（与顶部筛选相同的逻辑）
+                // 应用完整的筛选逻辑，但如果图表专用筛选有值，则覆盖顶部客户筛选
                 const filteredData = this.applyFiltersToData(this.data, {
                     startDate: startInput,
                     endDate: endInput,
-                    stations: [], // 客户图表不限制测站
-                    customers: selectedCustomers,
-                    satellites: [],
-                    statuses: [],
-                    types: []
+                    stations: stationValues,
+                    customers: selectedCustomers.length > 0 ? selectedCustomers : customerValues,
+                    satellites: satelliteValues,
+                    statuses: statusValues,
+                    types: typeValues
                 });
                 
                 this.generateCategoryChartFromData('customerChart', '客户名称趋势分析', '客户名称', groupBy, filteredData);
+            }
+
+            generateSatelliteChartWithFilter() {
+                if (!this.data || !this.data.length) return;
+                
+                // 获取顶部筛选的所有条件
+                const startInput = document.getElementById('startDate').value;
+                const endInput = document.getElementById('endDate').value;
+                const groupBy = document.getElementById('groupBy').value;
+                const stationValues = this.stationSelect.getSelectedValues();
+                const customerValues = this.customerSelect.getSelectedValues();
+                const satelliteValues = this.satelliteSelect.getSelectedValues();
+                const statusValues = this.statusSelect.getSelectedValues();
+                const typeValues = this.typeSelect.getSelectedValues();
+                
+                // 获取图表专用的卫星筛选
+                const selectedSatellites = this.satelliteChartSelect.getSelectedValues();
+                
+                // 应用完整的筛选逻辑，但如果图表专用筛选有值，则覆盖顶部卫星筛选
+                const filteredData = this.applyFiltersToData(this.data, {
+                    startDate: startInput,
+                    endDate: endInput,
+                    stations: stationValues,
+                    customers: customerValues,
+                    satellites: selectedSatellites.length > 0 ? selectedSatellites : satelliteValues,
+                    statuses: statusValues,
+                    types: typeValues
+                });
+                
+                this.generateCategoryChartFromData('satelliteChart', '卫星名称趋势分析', '卫星名称', groupBy, filteredData);
+            }
+
+            generateStatusChartWithFilter() {
+                if (!this.data || !this.data.length) return;
+                
+                // 获取顶部筛选的所有条件
+                const startInput = document.getElementById('startDate').value;
+                const endInput = document.getElementById('endDate').value;
+                const groupBy = document.getElementById('groupBy').value;
+                const stationValues = this.stationSelect.getSelectedValues();
+                const customerValues = this.customerSelect.getSelectedValues();
+                const satelliteValues = this.satelliteSelect.getSelectedValues();
+                const statusValues = this.statusSelect.getSelectedValues();
+                const typeValues = this.typeSelect.getSelectedValues();
+                
+                // 获取图表专用的状态筛选
+                const selectedStatuses = this.statusChartSelect.getSelectedValues();
+                
+                // 应用完整的筛选逻辑，但如果图表专用筛选有值，则覆盖顶部状态筛选
+                const filteredData = this.applyFiltersToData(this.data, {
+                    startDate: startInput,
+                    endDate: endInput,
+                    stations: stationValues,
+                    customers: customerValues,
+                    satellites: satelliteValues,
+                    statuses: selectedStatuses.length > 0 ? selectedStatuses : statusValues,
+                    types: typeValues
+                });
+                
+                this.generateCategoryChartFromData('statusChart', '任务结果状态趋势分析', '任务结果状态', groupBy, filteredData);
+            }
+
+            generateTypeChartWithFilter() {
+                if (!this.data || !this.data.length) return;
+                
+                // 获取顶部筛选的所有条件
+                const startInput = document.getElementById('startDate').value;
+                const endInput = document.getElementById('endDate').value;
+                const groupBy = document.getElementById('groupBy').value;
+                const stationValues = this.stationSelect.getSelectedValues();
+                const customerValues = this.customerSelect.getSelectedValues();
+                const satelliteValues = this.satelliteSelect.getSelectedValues();
+                const statusValues = this.statusSelect.getSelectedValues();
+                const typeValues = this.typeSelect.getSelectedValues();
+                
+                // 获取图表专用的类型筛选
+                const selectedTypes = this.typeChartSelect.getSelectedValues();
+                
+                // 应用完整的筛选逻辑，但如果图表专用筛选有值，则覆盖顶部类型筛选
+                const filteredData = this.applyFiltersToData(this.data, {
+                    startDate: startInput,
+                    endDate: endInput,
+                    stations: stationValues,
+                    customers: customerValues,
+                    satellites: satelliteValues,
+                    statuses: statusValues,
+                    types: selectedTypes.length > 0 ? selectedTypes : typeValues
+                });
+                
+                this.generateCategoryChartFromData('typeChart', '任务类型趋势分析', '任务类型', groupBy, filteredData);
             }
 
             // 提取的通用筛选逻辑
@@ -2141,6 +2409,9 @@
                 // 重置图表专用筛选
                 if (this.stationChartSelect) this.stationChartSelect.clearSelection();
                 if (this.customerChartSelect) this.customerChartSelect.clearSelection();
+                if (this.satelliteChartSelect) this.satelliteChartSelect.clearSelection();
+                if (this.statusChartSelect) this.statusChartSelect.clearSelection();
+                if (this.typeChartSelect) this.typeChartSelect.clearSelection();
 
                 document.getElementById('startDate').value = '';
                 document.getElementById('endDate').value = '';
