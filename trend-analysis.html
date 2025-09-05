@@ -303,9 +303,10 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>测站名称趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleStationLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <i class="fa fa-tag mr-1"></i>数据标签
-                        </button>
+                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                            <input type="checkbox" id="showStationLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                            <span class="text-sm font-medium">显示数据标签</span>
+                        </label>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="stationChart" data-type="image" title="下载图表图片">
                             <i class="fa fa-download mr-1"></i>下载图表
@@ -358,9 +359,10 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>客户名称趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleCustomerLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <i class="fa fa-tag mr-1"></i>数据标签
-                        </button>
+                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                            <input type="checkbox" id="showCustomerLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                            <span class="text-sm font-medium">显示数据标签</span>
+                        </label>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="customerChart" data-type="image" title="下载图表图片">
                             <i class="fa fa-download mr-1"></i>下载图表
@@ -413,9 +415,10 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>卫星名称趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleSatelliteLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <i class="fa fa-tag mr-1"></i>数据标签
-                        </button>
+                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                            <input type="checkbox" id="showSatelliteLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                            <span class="text-sm font-medium">显示数据标签</span>
+                        </label>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="satelliteChart" data-type="image" title="下载图表图片">
                             <i class="fa fa-download mr-1"></i>下载图表
@@ -437,8 +440,8 @@
                     </div>
                     <div class="grid grid-cols-1 gap-4">
                         <div class="flex items-center justify-between filter-select cursor-pointer" id="satelliteChartDropdown">
-                            <span class="text-gray-600" id="satelliteChartPlaceholder">请选择卫星名称（可多选）</span>
-                            <i class="fa fa-chevron-down text-gray-400"></i>
+                            <span id="satelliteChartDisplay">请选择卫星名称</span>
+                            <i class="fa fa-chevron-down text-xs"></i>
                         </div>
                         <div class="selected-tags" id="satelliteChartTags"></div>
                         <div class="dropdown-content hidden" id="satelliteChartOptions">
@@ -446,8 +449,12 @@
                                 <input type="text" placeholder="搜索卫星..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
                                        id="satelliteChartSearch">
                             </div>
+                            <div class="select-all-item" id="selectAllSatelliteChart">
+                                <i class="fa fa-check-square-o mr-2"></i>全选
+                            </div>
                             <div id="satelliteChartList"></div>
                         </div>
+                        <input type="hidden" id="satelliteChartValue" value="">
                     </div>
                 </div>
                 
@@ -466,9 +473,10 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>任务结果状态趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleStatusLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <i class="fa fa-tag mr-1"></i>数据标签
-                        </button>
+                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                            <input type="checkbox" id="showStatusLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                            <span class="text-sm font-medium">显示数据标签</span>
+                        </label>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="statusChart" data-type="image" title="下载图表图片">
                             <i class="fa fa-download mr-1"></i>下载图表
@@ -490,8 +498,8 @@
                     </div>
                     <div class="grid grid-cols-1 gap-4">
                         <div class="flex items-center justify-between filter-select cursor-pointer" id="statusChartDropdown">
-                            <span class="text-gray-600" id="statusChartPlaceholder">请选择任务结果状态（可多选）</span>
-                            <i class="fa fa-chevron-down text-gray-400"></i>
+                            <span id="statusChartDisplay">请选择任务状态</span>
+                            <i class="fa fa-chevron-down text-xs"></i>
                         </div>
                         <div class="selected-tags" id="statusChartTags"></div>
                         <div class="dropdown-content hidden" id="statusChartOptions">
@@ -499,8 +507,12 @@
                                 <input type="text" placeholder="搜索状态..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
                                        id="statusChartSearch">
                             </div>
+                            <div class="select-all-item" id="selectAllStatusChart">
+                                <i class="fa fa-check-square-o mr-2"></i>全选
+                            </div>
                             <div id="statusChartList"></div>
                         </div>
+                        <input type="hidden" id="statusChartValue" value="">
                     </div>
                 </div>
                 
@@ -519,9 +531,10 @@
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>任务类型趋势分析</span>
                     <div class="flex gap-2">
-                        <button id="toggleTypeLabels" class="px-2 py-1 bg-secondary/10 text-secondary rounded hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <i class="fa fa-tag mr-1"></i>数据标签
-                        </button>
+                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                            <input type="checkbox" id="showTypeLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                            <span class="text-sm font-medium">显示数据标签</span>
+                        </label>
                         <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
                                 data-chart="typeChart" data-type="image" title="下载图表图片">
                             <i class="fa fa-download mr-1"></i>下载图表
@@ -543,8 +556,8 @@
                     </div>
                     <div class="grid grid-cols-1 gap-4">
                         <div class="flex items-center justify-between filter-select cursor-pointer" id="typeChartDropdown">
-                            <span class="text-gray-600" id="typeChartPlaceholder">请选择任务类型（可多选）</span>
-                            <i class="fa fa-chevron-down text-gray-400"></i>
+                            <span id="typeChartDisplay">请选择任务类型</span>
+                            <i class="fa fa-chevron-down text-xs"></i>
                         </div>
                         <div class="selected-tags" id="typeChartTags"></div>
                         <div class="dropdown-content hidden" id="typeChartOptions">
@@ -552,8 +565,12 @@
                                 <input type="text" placeholder="搜索类型..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
                                        id="typeChartSearch">
                             </div>
+                            <div class="select-all-item" id="selectAllTypeChart">
+                                <i class="fa fa-check-square-o mr-2"></i>全选
+                            </div>
                             <div id="typeChartList"></div>
                         </div>
+                        <input type="hidden" id="typeChartValue" value="">
                     </div>
                 </div>
                 
@@ -996,7 +1013,6 @@
         class ChartGenerator {
             constructor() {
                 this.charts = {};
-                this.labelsVisible = {}; // 记录每个图表的数据标签显示状态
                 this.colors = [
                     '#165DFF', '#36CFC9', '#722ED1', '#FF7D00', '#F53F3F',
                     '#00B42A', '#86909C', '#F7BA1E', '#E53E3E', '#48BB78',
@@ -1009,97 +1025,7 @@
                 if (this.charts[chartId]) {
                     this.charts[chartId].destroy();
                     delete this.charts[chartId];
-                    delete this.labelsVisible[chartId];
                 }
-            }
-
-            // 切换数据标签显示状态
-            toggleDataLabels(chartId) {
-                const chart = this.charts[chartId];
-                if (!chart) return;
-
-                const currentState = this.labelsVisible[chartId] || false;
-                this.labelsVisible[chartId] = !currentState;
-
-                // 更新图表的全局datalabels配置
-                if (!currentState) {
-                    // 显示数据标签
-                    chart.options.plugins.datalabels = {
-                        display: true,
-                        anchor: 'end',
-                        align: function(context) {
-                            // 根据数据点位置智能调整标签位置避免重叠
-                            const value = context.parsed.y;
-                            const datasetIndex = context.datasetIndex;
-                            
-                            // 交替显示在上方和下方，避免重叠
-                            if (datasetIndex % 2 === 0) {
-                                return value > 5 ? 'top' : 'bottom';
-                            } else {
-                                return value > 5 ? 'bottom' : 'top';
-                            }
-                        },
-                        offset: 6,
-                        color: function(context) {
-                            // 使用与线条相同的颜色
-                            return context.dataset.borderColor;
-                        },
-                        backgroundColor: function(context) {
-                            // 为0值使用半透明背景，非0值使用白色背景
-                            return context.parsed.y === 0 ? 'rgba(245, 245, 245, 0.8)' : 'rgba(255, 255, 255, 0.95)';
-                        },
-                        borderColor: function(context) {
-                            return context.dataset.borderColor;
-                        },
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        padding: {
-                            top: 3,
-                            right: 5,
-                            bottom: 3,
-                            left: 5
-                        },
-                        font: {
-                            size: function(context) {
-                                // 0值使用小字体，非0值使用正常字体
-                                return context.parsed.y === 0 ? 9 : 11;
-                            },
-                            weight: function(context) {
-                                return context.parsed.y === 0 ? 'normal' : 'bold';
-                            },
-                            family: 'system-ui, -apple-system, sans-serif'
-                        },
-                        formatter: function(value, context) {
-                            // 显示所有数值，包括0
-                            return value.toString();
-                        },
-                        clip: false
-                    };
-                    
-                    // 同时更新每个数据集的datalabels配置
-                    chart.data.datasets.forEach((dataset, index) => {
-                        dataset.datalabels = {
-                            display: true
-                        };
-                    });
-                } else {
-                    // 隐藏数据标签
-                    chart.options.plugins.datalabels = {
-                        display: false
-                    };
-                    
-                    // 同时隐藏每个数据集的datalabels
-                    chart.data.datasets.forEach((dataset, index) => {
-                        dataset.datalabels = {
-                            display: false
-                        };
-                    });
-                }
-
-                // 重新渲染图表
-                chart.update('active');
-                
-                return !currentState;
             }
 
             generateTrendChart(chartId, title, xLabels, datasets) {
@@ -1115,8 +1041,19 @@
 
                 if (emptyState) emptyState.classList.add('hidden');
                 
-                // 初始化数据标签状态为隐藏
-                this.labelsVisible[chartId] = false;
+                // 获取对应的数据标签显示设置
+                const showLabelsCheckbox = document.getElementById(`show${chartId.charAt(0).toUpperCase() + chartId.slice(1, -5)}Labels`);
+                const showLabels = showLabelsCheckbox ? showLabelsCheckbox.checked : false;
+                
+                // 注册数据标签插件
+                Chart.register(ChartDataLabels);
+                
+                console.log(`Creating chart ${chartId} with ${datasets.length} datasets`);
+                
+                // 验证数据集
+                datasets.forEach((dataset, i) => {
+                    console.log(`Dataset ${i}: ${dataset.label}, data points: ${dataset.data.length}`);
+                });
 
                 // 曲线图样式配置
                 const styledDatasets = datasets.map((dataset, i) => ({
@@ -1134,9 +1071,15 @@
                     pointHoverRadius: 6,
                     pointBorderWidth: 2,
                     pointBorderColor: this.colors[i % this.colors.length],
-                    // 初始状态下隐藏数据标签
                     datalabels: {
-                        display: false
+                        display: showLabels,
+                        color: this.colors[i % this.colors.length],
+                        anchor: 'end',
+                        align: i % 2 === 0 ? 'top' : 'bottom',
+                        font: {
+                            size: 10,
+                            weight: 'bold'
+                        }
                     }
                 }));
 
@@ -1146,7 +1089,6 @@
                         labels: xLabels,
                         datasets: styledDatasets
                     },
-                    plugins: [ChartDataLabels], // 注册数据标签插件
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
@@ -1202,10 +1144,6 @@
                                     return b.raw - a.raw;
                                 }
                             },
-                            // 全局datalabels配置（默认关闭）
-                            datalabels: {
-                                display: false
-                            }
                         },
                         scales: {
                             x: {
@@ -1232,6 +1170,24 @@
 
                 this.charts[chartId] = chart;
                 return chart;
+            }
+            
+            toggleDataLabels(chartId) {
+                const chart = this.charts[chartId];
+                if (chart) {
+                    const showLabelsCheckbox = document.getElementById(`show${chartId.charAt(0).toUpperCase() + chartId.slice(1, -5)}Labels`);
+                    const showLabels = showLabelsCheckbox ? showLabelsCheckbox.checked : false;
+                    
+                    // 更新所有数据集的标签显示设置
+                    chart.data.datasets.forEach(dataset => {
+                        if (dataset.datalabels) {
+                            dataset.datalabels.display = showLabels;
+                        }
+                    });
+                    
+                    // 更新图表
+                    chart.update('none'); // 使用 'none' 模式实现即时更新
+                }
             }
         }
 
@@ -1704,31 +1660,19 @@
                     document.getElementById('dayEndDisplay').textContent = e.target.value;
                 });
 
-                // 数据标签切换按钮事件
-                const toggleButtons = [
-                    { id: 'toggleStationLabels', chart: 'stationChart' },
-                    { id: 'toggleCustomerLabels', chart: 'customerChart' },
-                    { id: 'toggleSatelliteLabels', chart: 'satelliteChart' },
-                    { id: 'toggleStatusLabels', chart: 'statusChart' },
-                    { id: 'toggleTypeLabels', chart: 'typeChart' }
+                // 数据标签复选框事件
+                const labelCheckboxes = [
+                    { id: 'showStationLabels', chartId: 'stationChart' },
+                    { id: 'showCustomerLabels', chartId: 'customerChart' },
+                    { id: 'showSatelliteLabels', chartId: 'satelliteChart' },
+                    { id: 'showStatusLabels', chartId: 'statusChart' },
+                    { id: 'showTypeLabels', chartId: 'typeChart' }
                 ];
 
-                toggleButtons.forEach(({ id, chart }) => {
-                    const btn = document.getElementById(id);
-                    if (btn) {
-                        btn.addEventListener('click', () => {
-                            const isVisible = this.chartGenerator.toggleDataLabels(chart);
-                            const icon = btn.querySelector('i');
-                            if (isVisible) {
-                                btn.classList.add('bg-secondary', 'text-white');
-                                btn.classList.remove('bg-secondary/10', 'text-secondary');
-                                if (icon) icon.className = 'fa fa-eye mr-1';
-                            } else {
-                                btn.classList.remove('bg-secondary', 'text-white');
-                                btn.classList.add('bg-secondary/10', 'text-secondary');
-                                if (icon) icon.className = 'fa fa-tag mr-1';
-                            }
-                        });
+                labelCheckboxes.forEach(({ id, chartId }) => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.addEventListener('change', () => this.chartGenerator.toggleDataLabels(chartId));
                     }
                 });
 
