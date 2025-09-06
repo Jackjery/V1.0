@@ -488,14 +488,78 @@
                     </div>
                 </h3>
                 
-                <!-- 任务结果状态筛选（图表专用） -->
+                <!-- 任务结果状态筛选（图表专用 - 带级联筛选） -->
                 <div class="mb-4">
                     <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">任务结果状态筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
+                        <label class="block text-sm font-medium text-gray-700">任务结果状态筛选 <span class="text-xs text-gray-500">(可多选，可搜索，支持级联筛选)</span></label>
                         <button id="resetStatusChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
                             <i class="fa fa-refresh mr-1"></i>重置筛选
                         </button>
                     </div>
+                    
+                    <!-- 级联筛选条件 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">测站名称</label>
+                            <div class="flex items-center justify-between filter-select cursor-pointer" id="statusStationDropdown">
+                                <span id="statusStationDisplay">请选择测站</span>
+                                <i class="fa fa-chevron-down text-xs"></i>
+                            </div>
+                            <div class="selected-tags" id="statusStationTags"></div>
+                            <div class="dropdown-content hidden" id="statusStationOptions">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索测站..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                           id="statusStationSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllStatusStation">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="statusStationList"></div>
+                            </div>
+                            <input type="hidden" id="statusStationValue" value="">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">客户名称</label>
+                            <div class="flex items-center justify-between filter-select cursor-pointer" id="statusCustomerDropdown">
+                                <span id="statusCustomerDisplay">请选择客户</span>
+                                <i class="fa fa-chevron-down text-xs"></i>
+                            </div>
+                            <div class="selected-tags" id="statusCustomerTags"></div>
+                            <div class="dropdown-content hidden" id="statusCustomerOptions">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索客户..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                           id="statusCustomerSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllStatusCustomer">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="statusCustomerList"></div>
+                            </div>
+                            <input type="hidden" id="statusCustomerValue" value="">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">卫星名称</label>
+                            <div class="flex items-center justify-between filter-select cursor-pointer" id="statusSatelliteDropdown">
+                                <span id="statusSatelliteDisplay">请选择卫星</span>
+                                <i class="fa fa-chevron-down text-xs"></i>
+                            </div>
+                            <div class="selected-tags" id="statusSatelliteTags"></div>
+                            <div class="dropdown-content hidden" id="statusSatelliteOptions">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索卫星..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                           id="statusSatelliteSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllStatusSatellite">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="statusSatelliteList"></div>
+                            </div>
+                            <input type="hidden" id="statusSatelliteValue" value="">
+                        </div>
+                    </div>
+                    
                     <div class="grid grid-cols-1 gap-4">
                         <div class="flex items-center justify-between filter-select cursor-pointer" id="statusChartDropdown">
                             <span id="statusChartDisplay">请选择任务状态</span>
@@ -546,14 +610,98 @@
                     </div>
                 </h3>
                 
-                <!-- 任务类型筛选（图表专用） -->
+                <!-- 任务类型筛选（图表专用 - 带级联筛选） -->
                 <div class="mb-4">
                     <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">任务类型筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
+                        <label class="block text-sm font-medium text-gray-700">任务类型筛选 <span class="text-xs text-gray-500">(可多选，可搜索，支持级联筛选)</span></label>
                         <button id="resetTypeChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
                             <i class="fa fa-refresh mr-1"></i>重置筛选
                         </button>
                     </div>
+                    
+                    <!-- 级联筛选条件 -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">测站名称</label>
+                            <div class="flex items-center justify-between filter-select cursor-pointer" id="typeStationDropdown">
+                                <span id="typeStationDisplay">请选择测站</span>
+                                <i class="fa fa-chevron-down text-xs"></i>
+                            </div>
+                            <div class="selected-tags" id="typeStationTags"></div>
+                            <div class="dropdown-content hidden" id="typeStationOptions">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索测站..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                           id="typeStationSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllTypeStation">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="typeStationList"></div>
+                            </div>
+                            <input type="hidden" id="typeStationValue" value="">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">客户名称</label>
+                            <div class="flex items-center justify-between filter-select cursor-pointer" id="typeCustomerDropdown">
+                                <span id="typeCustomerDisplay">请选择客户</span>
+                                <i class="fa fa-chevron-down text-xs"></i>
+                            </div>
+                            <div class="selected-tags" id="typeCustomerTags"></div>
+                            <div class="dropdown-content hidden" id="typeCustomerOptions">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索客户..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                           id="typeCustomerSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllTypeCustomer">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="typeCustomerList"></div>
+                            </div>
+                            <input type="hidden" id="typeCustomerValue" value="">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">卫星名称</label>
+                            <div class="flex items-center justify-between filter-select cursor-pointer" id="typeSatelliteDropdown">
+                                <span id="typeSatelliteDisplay">请选择卫星</span>
+                                <i class="fa fa-chevron-down text-xs"></i>
+                            </div>
+                            <div class="selected-tags" id="typeSatelliteTags"></div>
+                            <div class="dropdown-content hidden" id="typeSatelliteOptions">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索卫星..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                           id="typeSatelliteSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllTypeSatellite">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="typeSatelliteList"></div>
+                            </div>
+                            <input type="hidden" id="typeSatelliteValue" value="">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">任务状态</label>
+                            <div class="flex items-center justify-between filter-select cursor-pointer" id="typeStatusDropdown">
+                                <span id="typeStatusDisplay">请选择状态</span>
+                                <i class="fa fa-chevron-down text-xs"></i>
+                            </div>
+                            <div class="selected-tags" id="typeStatusTags"></div>
+                            <div class="dropdown-content hidden" id="typeStatusOptions">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索状态..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                                           id="typeStatusSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllTypeStatus">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="typeStatusList"></div>
+                            </div>
+                            <input type="hidden" id="typeStatusValue" value="">
+                        </div>
+                    </div>
+                    
                     <div class="grid grid-cols-1 gap-4">
                         <div class="flex items-center justify-between filter-select cursor-pointer" id="typeChartDropdown">
                             <span id="typeChartDisplay">请选择任务类型</span>
@@ -1622,11 +1770,86 @@
                     }
                 );
 
+                // 初始化状态图表级联筛选器
+                this.statusStationSelect = new MultiSelectDropdown(
+                    'statusStationDropdown', 'statusStationOptions', 'statusStationDisplay',
+                    'statusStationValue', 'statusStationTags', 'statusStationSearch', 'selectAllStatusStation',
+                    (values) => {
+                        this.updateStatusCustomerOptions();
+                        this.updateStatusSatelliteOptions();
+                        this.updateStatusChartOptions();
+                        this.generateStatusChartWithFilter();
+                    }
+                );
+
+                this.statusCustomerSelect = new MultiSelectDropdown(
+                    'statusCustomerDropdown', 'statusCustomerOptions', 'statusCustomerDisplay',
+                    'statusCustomerValue', 'statusCustomerTags', 'statusCustomerSearch', 'selectAllStatusCustomer',
+                    (values) => {
+                        this.updateStatusSatelliteOptions();
+                        this.updateStatusChartOptions();
+                        this.generateStatusChartWithFilter();
+                    }
+                );
+
+                this.statusSatelliteSelect = new MultiSelectDropdown(
+                    'statusSatelliteDropdown', 'statusSatelliteOptions', 'statusSatelliteDisplay',
+                    'statusSatelliteValue', 'statusSatelliteTags', 'statusSatelliteSearch', 'selectAllStatusSatellite',
+                    (values) => {
+                        this.updateStatusChartOptions();
+                        this.generateStatusChartWithFilter();
+                    }
+                );
+
                 this.statusChartSelect = new MultiSelectDropdown(
                     'statusChartDropdown', 'statusChartOptions', 'statusChartDisplay',
                     'statusChartValue', 'statusChartTags', 'statusChartSearch', 'selectAllStatusChart',
                     (values) => {
+                        this.updateTypeChartOptions(); // 状态选择改变时更新类型选项
                         this.generateStatusChartWithFilter();
+                    }
+                );
+
+                // 初始化类型图表级联筛选器
+                this.typeStationSelect = new MultiSelectDropdown(
+                    'typeStationDropdown', 'typeStationOptions', 'typeStationDisplay',
+                    'typeStationValue', 'typeStationTags', 'typeStationSearch', 'selectAllTypeStation',
+                    (values) => {
+                        this.updateTypeCustomerOptions();
+                        this.updateTypeSatelliteOptions();
+                        this.updateTypeStatusOptions();
+                        this.updateTypeChartOptions();
+                        this.generateTypeChartWithFilter();
+                    }
+                );
+
+                this.typeCustomerSelect = new MultiSelectDropdown(
+                    'typeCustomerDropdown', 'typeCustomerOptions', 'typeCustomerDisplay',
+                    'typeCustomerValue', 'typeCustomerTags', 'typeCustomerSearch', 'selectAllTypeCustomer',
+                    (values) => {
+                        this.updateTypeSatelliteOptions();
+                        this.updateTypeStatusOptions();
+                        this.updateTypeChartOptions();
+                        this.generateTypeChartWithFilter();
+                    }
+                );
+
+                this.typeSatelliteSelect = new MultiSelectDropdown(
+                    'typeSatelliteDropdown', 'typeSatelliteOptions', 'typeSatelliteDisplay',
+                    'typeSatelliteValue', 'typeSatelliteTags', 'typeSatelliteSearch', 'selectAllTypeSatellite',
+                    (values) => {
+                        this.updateTypeStatusOptions();
+                        this.updateTypeChartOptions();
+                        this.generateTypeChartWithFilter();
+                    }
+                );
+
+                this.typeStatusSelect = new MultiSelectDropdown(
+                    'typeStatusDropdown', 'typeStatusOptions', 'typeStatusDisplay',
+                    'typeStatusValue', 'typeStatusTags', 'typeStatusSearch', 'selectAllTypeStatus',
+                    (values) => {
+                        this.updateTypeChartOptions();
+                        this.generateTypeChartWithFilter();
                     }
                 );
 
@@ -1687,21 +1910,37 @@
                     { id: 'resetStationChart', selector: 'stationChartSelect', generator: () => this.generateStationChartWithFilter() },
                     { id: 'resetCustomerChart', selector: 'customerChartSelect', generator: () => this.generateCustomerChartWithFilter() },
                     { id: 'resetSatelliteChart', selector: 'satelliteChartSelect', generator: () => this.generateSatelliteChartWithFilter() },
-                    { id: 'resetStatusChart', selector: 'statusChartSelect', generator: () => this.generateStatusChartWithFilter() },
-                    { id: 'resetTypeChart', selector: 'typeChartSelect', generator: () => this.generateTypeChartWithFilter() }
+                    { 
+                        id: 'resetStatusChart', 
+                        selector: 'statusChartSelect', 
+                        generator: () => {
+                            // 重置状态图表级联筛选器
+                            ['statusStationSelect', 'statusCustomerSelect', 'statusSatelliteSelect', 'statusChartSelect'].forEach(selectorName => {
+                                if (this[selectorName]) this[selectorName].clearSelection();
+                            });
+                            this.initializeStatusChartFilters();
+                            this.generateStatusChartWithFilter();
+                        }
+                    },
+                    { 
+                        id: 'resetTypeChart', 
+                        selector: 'typeChartSelect', 
+                        generator: () => {
+                            // 重置类型图表级联筛选器
+                            ['typeStationSelect', 'typeCustomerSelect', 'typeSatelliteSelect', 'typeStatusSelect', 'typeChartSelect'].forEach(selectorName => {
+                                if (this[selectorName]) this[selectorName].clearSelection();
+                            });
+                            this.initializeTypeChartFilters();
+                            this.generateTypeChartWithFilter();
+                        }
+                    }
                 ];
 
                 resetChartButtons.forEach(({ id, selector, generator }) => {
                     const btn = document.getElementById(id);
                     if (btn) {
                         btn.addEventListener('click', () => {
-                            // 清空当前图表的专用筛选
-                            if (this[selector]) {
-                                this[selector].clearSelection();
-                            }
-                            // 触发级联更新
-                            this.updateChartFilterOptions();
-                            // 重新生成图表（使用顶部筛选条件）
+                            // 执行自定义的重置逻辑
                             generator();
                         });
                     }
@@ -1844,6 +2083,10 @@
                 
                 this.satelliteChartSelect.setOptions(satelliteOptions);
                 
+                // 初始化底部图表级联筛选器的选项
+                this.initializeStatusChartFilters();
+                this.initializeTypeChartFilters();
+
                 // 使用级联更新方法初始化底部筛选选项
                 this.updateStatusChartOptions();
                 this.updateTypeChartOptions();
@@ -2248,27 +2491,38 @@
             generateStatusChartWithFilter() {
                 if (!this.data || !this.data.length) return;
                 
-                // 获取顶部筛选的所有条件
+                // 获取时间和分组条件
                 const startInput = document.getElementById('startDate').value;
                 const endInput = document.getElementById('endDate').value;
                 const groupBy = document.getElementById('groupBy').value;
+                
+                // 获取顶部筛选条件
                 const topStationValues = this.stationSelect.getSelectedValues();
                 const topCustomerValues = this.customerSelect.getSelectedValues();
                 const topSatelliteValues = this.satelliteSelect.getSelectedValues();
                 const topStatusValues = this.statusSelect.getSelectedValues();
                 const topTypeValues = this.typeSelect.getSelectedValues();
                 
-                // 获取图表专用的状态筛选
+                // 获取状态图表级联筛选条件
+                const statusStationValues = this.statusStationSelect.getSelectedValues();
+                const statusCustomerValues = this.statusCustomerSelect.getSelectedValues();
+                const statusSatelliteValues = this.statusSatelliteSelect.getSelectedValues();
                 const selectedStatuses = this.statusChartSelect.getSelectedValues();
                 
-                // 应用筛选逻辑：使用顶部筛选条件，但状态筛选以图表专用筛选为准
+                // 级联筛选逻辑：如果状态图表级联筛选器有选择，优先使用它们，否则使用顶部筛选条件
+                const finalStationValues = statusStationValues.length > 0 ? statusStationValues : topStationValues;
+                const finalCustomerValues = statusCustomerValues.length > 0 ? statusCustomerValues : topCustomerValues;
+                const finalSatelliteValues = statusSatelliteValues.length > 0 ? statusSatelliteValues : topSatelliteValues;
+                const finalStatusValues = selectedStatuses.length > 0 ? selectedStatuses : topStatusValues;
+                
+                // 应用筛选逻辑
                 const filteredData = this.applyFiltersToData(this.data, {
                     startDate: startInput,
                     endDate: endInput,
-                    stations: topStationValues,
-                    customers: topCustomerValues,
-                    satellites: topSatelliteValues,
-                    statuses: selectedStatuses.length > 0 ? selectedStatuses : topStatusValues,
+                    stations: finalStationValues,
+                    customers: finalCustomerValues,
+                    satellites: finalSatelliteValues,
+                    statuses: finalStatusValues,
                     types: topTypeValues
                 });
                 
@@ -2278,28 +2532,41 @@
             generateTypeChartWithFilter() {
                 if (!this.data || !this.data.length) return;
                 
-                // 获取顶部筛选的所有条件
+                // 获取时间和分组条件
                 const startInput = document.getElementById('startDate').value;
                 const endInput = document.getElementById('endDate').value;
                 const groupBy = document.getElementById('groupBy').value;
+                
+                // 获取顶部筛选条件
                 const topStationValues = this.stationSelect.getSelectedValues();
                 const topCustomerValues = this.customerSelect.getSelectedValues();
                 const topSatelliteValues = this.satelliteSelect.getSelectedValues();
                 const topStatusValues = this.statusSelect.getSelectedValues();
                 const topTypeValues = this.typeSelect.getSelectedValues();
                 
-                // 获取图表专用的类型筛选
+                // 获取类型图表级联筛选条件
+                const typeStationValues = this.typeStationSelect.getSelectedValues();
+                const typeCustomerValues = this.typeCustomerSelect.getSelectedValues();
+                const typeSatelliteValues = this.typeSatelliteSelect.getSelectedValues();
+                const typeStatusValues = this.typeStatusSelect.getSelectedValues();
                 const selectedTypes = this.typeChartSelect.getSelectedValues();
                 
-                // 应用筛选逻辑：使用顶部筛选条件，但类型筛选以图表专用筛选为准
+                // 级联筛选逻辑：如果类型图表级联筛选器有选择，优先使用它们，否则使用顶部筛选条件
+                const finalStationValues = typeStationValues.length > 0 ? typeStationValues : topStationValues;
+                const finalCustomerValues = typeCustomerValues.length > 0 ? typeCustomerValues : topCustomerValues;
+                const finalSatelliteValues = typeSatelliteValues.length > 0 ? typeSatelliteValues : topSatelliteValues;
+                const finalStatusValues = typeStatusValues.length > 0 ? typeStatusValues : topStatusValues;
+                const finalTypeValues = selectedTypes.length > 0 ? selectedTypes : topTypeValues;
+                
+                // 应用筛选逻辑
                 const filteredData = this.applyFiltersToData(this.data, {
                     startDate: startInput,
                     endDate: endInput,
-                    stations: topStationValues,
-                    customers: topCustomerValues,
-                    satellites: topSatelliteValues,
-                    statuses: topStatusValues,
-                    types: selectedTypes.length > 0 ? selectedTypes : topTypeValues
+                    stations: finalStationValues,
+                    customers: finalCustomerValues,
+                    satellites: finalSatelliteValues,
+                    statuses: finalStatusValues,
+                    types: finalTypeValues
                 });
                 
                 this.generateCategoryChartFromData('typeChart', '任务类型趋势分析', '任务类型', groupBy, filteredData);
@@ -2429,6 +2696,9 @@
                 const topStationValues = this.stationSelect.getSelectedValues();
                 const topCustomerValues = this.customerSelect.getSelectedValues();
                 const topSatelliteValues = this.satelliteSelect.getSelectedValues();
+                
+                // 获取底部状态图表当前已选择的状态（用于重新筛选时保持一致性）
+                const currentSelectedStatuses = this.statusChartSelect ? this.statusChartSelect.getSelectedValues() : [];
 
                 // 根据顶部筛选条件（测站、客户、卫星）过滤数据，为状态图表提供可选的状态选项
                 const filteredForStatus = this.data.filter(item => {
@@ -2449,6 +2719,14 @@
 
                 const statusOptions = availableStatuses.map(status => ({ value: status, label: status }));
                 this.statusChartSelect.setOptions(statusOptions);
+                
+                // 如果之前有选择的状态在新选项中仍然存在，保持选中状态
+                if (currentSelectedStatuses.length > 0) {
+                    const validStatuses = currentSelectedStatuses.filter(status => availableStatuses.includes(status));
+                    if (validStatuses.length > 0) {
+                        this.statusChartSelect.setSelectedValues(validStatuses);
+                    }
+                }
             }
 
             updateTypeChartOptions() {
@@ -2459,8 +2737,14 @@
                 const topCustomerValues = this.customerSelect.getSelectedValues();
                 const topSatelliteValues = this.satelliteSelect.getSelectedValues();
                 const topStatusValues = this.statusSelect.getSelectedValues();
+                
+                // 获取底部状态图表的选择（用于级联筛选类型选项）
+                const statusChartValues = this.statusChartSelect ? this.statusChartSelect.getSelectedValues() : [];
+                
+                // 获取底部类型图表当前已选择的类型（用于重新筛选时保持一致性）
+                const currentSelectedTypes = this.typeChartSelect ? this.typeChartSelect.getSelectedValues() : [];
 
-                // 根据顶部筛选条件（测站、客户、卫星、状态）过滤数据，为类型图表提供可选的类型选项
+                // 根据顶部筛选条件和底部状态选择过滤数据，为类型图表提供可选的类型选项
                 const filteredForType = this.data.filter(item => {
                     const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
                     const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
@@ -2468,10 +2752,17 @@
                     const itemStatus = (item[FIELD_MAPPING['任务结果状态']] || '').toString().trim();
 
                     // 应用顶部筛选条件：测站、客户、卫星、状态的级联筛选
-                    return (!topStationValues.length || topStationValues.includes(itemStation)) &&
-                           (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
-                           (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite)) &&
-                           (!topStatusValues.length || topStatusValues.includes(itemStatus));
+                    let passTopFilter = (!topStationValues.length || topStationValues.includes(itemStation)) &&
+                                       (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
+                                       (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite)) &&
+                                       (!topStatusValues.length || topStatusValues.includes(itemStatus));
+                    
+                    // 如果底部状态图表有选择，则进一步过滤
+                    if (statusChartValues.length > 0) {
+                        passTopFilter = passTopFilter && statusChartValues.includes(itemStatus);
+                    }
+                    
+                    return passTopFilter;
                 });
 
                 // 获取过滤后的可选类型
@@ -2481,8 +2772,191 @@
 
                 const typeOptions = availableTypes.map(type => ({ value: type, label: type }));
                 this.typeChartSelect.setOptions(typeOptions);
+                
+                // 如果之前有选择的类型在新选项中仍然存在，保持选中状态
+                if (currentSelectedTypes.length > 0) {
+                    const validTypes = currentSelectedTypes.filter(type => availableTypes.includes(type));
+                    if (validTypes.length > 0) {
+                        this.typeChartSelect.setSelectedValues(validTypes);
+                    }
+                }
             }
 
+            // ======== 状态图表级联筛选方法 ========
+            initializeStatusChartFilters() {
+                if (!this.data || !this.data.length) return;
+                
+                // 初始化测站选项
+                const stationOptions = this.filterValues['测站名称'].map(station => ({ value: station, label: station }));
+                this.statusStationSelect.setOptions(stationOptions);
+                
+                // 初始化客户选项
+                const customerOptions = this.filterValues['客户名称'].map(customer => ({ value: customer, label: customer }));
+                this.statusCustomerSelect.setOptions(customerOptions);
+                
+                // 初始化卫星选项（空，等待级联更新）
+                this.statusSatelliteSelect.setOptions([]);
+                
+                // 初始化状态选项（空，等待级联更新）
+                this.statusChartSelect.setOptions([]);
+            }
+
+            updateStatusCustomerOptions() {
+                if (!this.data || !this.data.length) return;
+                
+                const stationValues = this.statusStationSelect.getSelectedValues();
+                
+                if (stationValues.length === 0) {
+                    // 如果没有选择测站，显示所有客户
+                    const customerOptions = this.filterValues['客户名称'].map(customer => ({ value: customer, label: customer }));
+                    this.statusCustomerSelect.setOptions(customerOptions);
+                    return;
+                }
+                
+                const filteredCustomers = [...new Set(
+                    this.data
+                        .filter(item => stationValues.includes((item[FIELD_MAPPING['测站名称']] || '').toString().trim()))
+                        .map(item => (item[FIELD_MAPPING['客户名称']] || '').toString().trim())
+                        .filter(Boolean)
+                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+                
+                const customerOptions = filteredCustomers.map(customer => ({ value: customer, label: customer }));
+                this.statusCustomerSelect.setOptions(customerOptions);
+            }
+
+            updateStatusSatelliteOptions() {
+                if (!this.data || !this.data.length) return;
+                
+                const stationValues = this.statusStationSelect.getSelectedValues();
+                const customerValues = this.statusCustomerSelect.getSelectedValues();
+                
+                if (stationValues.length === 0 && customerValues.length === 0) {
+                    this.statusSatelliteSelect.setOptions([]);
+                    document.getElementById('statusSatelliteDisplay').textContent = '请先选择测站或客户';
+                    return;
+                }
+                
+                const filteredSatellites = [...new Set(
+                    this.data
+                        .filter(item => {
+                            const matchesStation = !stationValues.length ||
+                                                  stationValues.includes((item[FIELD_MAPPING['测站名称']] || '').toString().trim());
+                            const matchesCustomer = !customerValues.length ||
+                                                  customerValues.includes((item[FIELD_MAPPING['客户名称']] || '').toString().trim());
+                            return matchesStation && matchesCustomer;
+                        })
+                        .map(item => (item[FIELD_MAPPING['卫星名称']] || '').toString().trim())
+                        .filter(Boolean)
+                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+                
+                const satelliteOptions = filteredSatellites.map(satellite => ({ value: satellite, label: satellite }));
+                this.statusSatelliteSelect.setOptions(satelliteOptions);
+                document.getElementById('statusSatelliteDisplay').textContent = '请选择卫星';
+            }
+
+            // ======== 类型图表级联筛选方法 ========
+            initializeTypeChartFilters() {
+                if (!this.data || !this.data.length) return;
+                
+                // 初始化测站选项
+                const stationOptions = this.filterValues['测站名称'].map(station => ({ value: station, label: station }));
+                this.typeStationSelect.setOptions(stationOptions);
+                
+                // 初始化客户选项
+                const customerOptions = this.filterValues['客户名称'].map(customer => ({ value: customer, label: customer }));
+                this.typeCustomerSelect.setOptions(customerOptions);
+                
+                // 初始化其他选项（空，等待级联更新）
+                this.typeSatelliteSelect.setOptions([]);
+                this.typeStatusSelect.setOptions([]);
+                this.typeChartSelect.setOptions([]);
+            }
+
+            updateTypeCustomerOptions() {
+                if (!this.data || !this.data.length) return;
+                
+                const stationValues = this.typeStationSelect.getSelectedValues();
+                
+                if (stationValues.length === 0) {
+                    // 如果没有选择测站，显示所有客户
+                    const customerOptions = this.filterValues['客户名称'].map(customer => ({ value: customer, label: customer }));
+                    this.typeCustomerSelect.setOptions(customerOptions);
+                    return;
+                }
+                
+                const filteredCustomers = [...new Set(
+                    this.data
+                        .filter(item => stationValues.includes((item[FIELD_MAPPING['测站名称']] || '').toString().trim()))
+                        .map(item => (item[FIELD_MAPPING['客户名称']] || '').toString().trim())
+                        .filter(Boolean)
+                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+                
+                const customerOptions = filteredCustomers.map(customer => ({ value: customer, label: customer }));
+                this.typeCustomerSelect.setOptions(customerOptions);
+            }
+
+            updateTypeSatelliteOptions() {
+                if (!this.data || !this.data.length) return;
+                
+                const stationValues = this.typeStationSelect.getSelectedValues();
+                const customerValues = this.typeCustomerSelect.getSelectedValues();
+                
+                if (stationValues.length === 0 && customerValues.length === 0) {
+                    this.typeSatelliteSelect.setOptions([]);
+                    document.getElementById('typeSatelliteDisplay').textContent = '请先选择测站或客户';
+                    return;
+                }
+                
+                const filteredSatellites = [...new Set(
+                    this.data
+                        .filter(item => {
+                            const matchesStation = !stationValues.length ||
+                                                  stationValues.includes((item[FIELD_MAPPING['测站名称']] || '').toString().trim());
+                            const matchesCustomer = !customerValues.length ||
+                                                  customerValues.includes((item[FIELD_MAPPING['客户名称']] || '').toString().trim());
+                            return matchesStation && matchesCustomer;
+                        })
+                        .map(item => (item[FIELD_MAPPING['卫星名称']] || '').toString().trim())
+                        .filter(Boolean)
+                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+                
+                const satelliteOptions = filteredSatellites.map(satellite => ({ value: satellite, label: satellite }));
+                this.typeSatelliteSelect.setOptions(satelliteOptions);
+                document.getElementById('typeSatelliteDisplay').textContent = '请选择卫星';
+            }
+
+            updateTypeStatusOptions() {
+                if (!this.data || !this.data.length) return;
+                
+                const stationValues = this.typeStationSelect.getSelectedValues();
+                const customerValues = this.typeCustomerSelect.getSelectedValues();
+                const satelliteValues = this.typeSatelliteSelect.getSelectedValues();
+                
+                if (stationValues.length === 0 && customerValues.length === 0 && satelliteValues.length === 0) {
+                    this.typeStatusSelect.setOptions([]);
+                    document.getElementById('typeStatusDisplay').textContent = '请先选择测站、客户或卫星';
+                    return;
+                }
+                
+                const filteredStatuses = [...new Set(
+                    this.data
+                        .filter(item => {
+                            const matchesStation = !stationValues.length ||
+                                                  stationValues.includes((item[FIELD_MAPPING['测站名称']] || '').toString().trim());
+                            const matchesCustomer = !customerValues.length ||
+                                                  customerValues.includes((item[FIELD_MAPPING['客户名称']] || '').toString().trim());
+                            const matchesSatellite = !satelliteValues.length ||
+                                                   satelliteValues.includes((item[FIELD_MAPPING['卫星名称']] || '').toString().trim());
+                            return matchesStation && matchesCustomer && matchesSatellite;
+                        })
+                        .map(item => (item[FIELD_MAPPING['任务结果状态']] || '').toString().trim())
+                        .filter(Boolean)
+                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+                
+                const statusOptions = filteredStatuses.map(status => ({ value: status, label: status }));
+                this.typeStatusSelect.setOptions(statusOptions);
+                document.getElementById('typeStatusDisplay').textContent = '请选择状态';
+            }
 
             resetChartSubsequentFilters(after = '') {
                 const filterOrder = ['station', 'customer', 'satellite', 'status', 'type'];
