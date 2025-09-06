@@ -302,7 +302,31 @@
             <div class="bg-white rounded-lg p-6 card-shadow">
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>测站名称趋势分析</span>
-                    <div class="flex gap-2">
+                    <div class="flex items-center gap-3">
+                        <!-- 测站名称筛选 -->
+                        <div class="dropdown-container relative">
+                            <div class="flex items-center justify-between filter-select cursor-pointer min-w-[180px]" id="stationChartDropdown">
+                                <span id="stationChartDisplay" class="text-sm truncate">请选择测站</span>
+                                <i class="fa fa-chevron-down text-xs ml-2"></i>
+                            </div>
+                            <div class="selected-tags" id="stationChartTags"></div>
+                            <div class="dropdown-content hidden absolute top-full left-0 z-50 bg-white border border-gray-200 rounded-md shadow-lg min-w-[200px]" id="stationChartOptions">
+                                <div class="p-2 border-b border-gray-100">
+                                    <input type="text" placeholder="搜索测站..." class="w-full p-1 text-sm border border-gray-200 rounded" id="stationChartSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllStationChart">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                            </div>
+                            <input type="hidden" id="stationChartValue" value="">
+                        </div>
+                        
+                        <button id="resetStationChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        
+                        <div class="h-4 w-px bg-gray-300"></div>
+                        
                         <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
                             <input type="checkbox" id="showStationLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
                             <span class="text-sm font-medium">显示数据标签</span>
@@ -318,32 +342,6 @@
                     </div>
                 </h3>
                 
-                <!-- 测站名称筛选（图表专用） -->
-                <div class="mb-4 border-b border-gray-100 pb-4">
-                    <div class="dropdown-container">
-                        <div class="flex items-center justify-between mb-1">
-                            <label class="block text-sm font-medium text-gray-700">测站名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                            <button id="resetStationChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                                <i class="fa fa-refresh mr-1"></i>重置筛选
-                            </button>
-                        </div>
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="stationChartDropdown">
-                            <span id="stationChartDisplay">请选择测站</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="stationChartTags"></div>
-                        <div class="dropdown-content hidden" id="stationChartOptions">
-                            <div class="p-2 border-b border-gray-100">
-                                <input type="text" placeholder="搜索测站..." class="w-full p-1 text-sm border border-gray-200 rounded" id="stationChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllStationChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                        </div>
-                        <input type="hidden" id="stationChartValue" value="">
-                    </div>
-                </div>
-                
                 <div class="chart-container">
                     <canvas id="stationChart"></canvas>
                     <div class="absolute inset-0 flex items-center justify-center text-gray-500 hidden" id="stationChartEmpty">
@@ -358,47 +356,48 @@
             <div class="bg-white rounded-lg p-6 card-shadow">
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>客户名称趋势分析</span>
-                    <div class="flex gap-2">
-                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <input type="checkbox" id="showCustomerLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
-                            <span class="text-sm font-medium">显示数据标签</span>
-                        </label>
-                        <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
-                                data-chart="customerChart" data-type="image" title="下载图表图片">
-                            <i class="fa fa-download mr-1"></i>下载图表
+                    <div class="flex items-center gap-4">
+                        <!-- 客户名称筛选（图表专用） -->
+                        <div class="dropdown-container relative" style="min-width: 160px;">
+                            <div class="flex items-center justify-between filter-select cursor-pointer text-sm" id="customerChartDropdown">
+                                <span id="customerChartDisplay" class="truncate" style="max-width: 120px;">请选择客户</span>
+                                <i class="fa fa-chevron-down text-xs ml-2"></i>
+                            </div>
+                            <div class="selected-tags" id="customerChartTags"></div>
+                            <div class="dropdown-content hidden absolute top-full left-0 z-50" id="customerChartOptions" style="min-width: 200px;">
+                                <div class="p-2 border-b border-gray-100">
+                                    <input type="text" placeholder="搜索客户..." class="w-full p-1 text-sm border border-gray-200 rounded" id="customerChartSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllCustomerChart">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                            </div>
+                            <input type="hidden" id="customerChartValue" value="">
+                        </div>
+                        
+                        <button id="resetCustomerChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
+                            <i class="fa fa-refresh mr-1"></i>重置筛选
                         </button>
-                        <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
-                                data-chart="customerChart" data-type="csv" title="下载图表数据">
-                            <i class="fa fa-table mr-1"></i>下载数据
-                        </button>
-                    </div>
-                </h3>
-                
-                <!-- 客户名称筛选（图表专用） -->
-                <div class="mb-4 border-b border-gray-100 pb-4">
-                    <div class="dropdown-container">
-                        <div class="flex items-center justify-between mb-1">
-                            <label class="block text-sm font-medium text-gray-700">客户名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                            <button id="resetCustomerChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                                <i class="fa fa-refresh mr-1"></i>重置筛选
+                        
+                        <!-- 分隔线 -->
+                        <div class="w-px h-6 bg-gray-300"></div>
+                        
+                        <div class="flex gap-2">
+                            <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                                <input type="checkbox" id="showCustomerLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                                <span class="text-sm font-medium">显示数据标签</span>
+                            </label>
+                            <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
+                                    data-chart="customerChart" data-type="image" title="下载图表图片">
+                                <i class="fa fa-download mr-1"></i>下载图表
+                            </button>
+                            <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
+                                    data-chart="customerChart" data-type="csv" title="下载图表数据">
+                                <i class="fa fa-table mr-1"></i>下载数据
                             </button>
                         </div>
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="customerChartDropdown">
-                            <span id="customerChartDisplay">请选择客户</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="customerChartTags"></div>
-                        <div class="dropdown-content hidden" id="customerChartOptions">
-                            <div class="p-2 border-b border-gray-100">
-                                <input type="text" placeholder="搜索客户..." class="w-full p-1 text-sm border border-gray-200 rounded" id="customerChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllCustomerChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                        </div>
-                        <input type="hidden" id="customerChartValue" value="">
                     </div>
-                </div>
+                </h3>
                 
                 <div class="chart-container">
                     <canvas id="customerChart"></canvas>
@@ -414,49 +413,49 @@
             <div class="bg-white rounded-lg p-6 card-shadow">
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>卫星名称趋势分析</span>
-                    <div class="flex gap-2">
-                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <input type="checkbox" id="showSatelliteLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
-                            <span class="text-sm font-medium">显示数据标签</span>
-                        </label>
-                        <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
-                                data-chart="satelliteChart" data-type="image" title="下载图表图片">
-                            <i class="fa fa-download mr-1"></i>下载图表
-                        </button>
-                        <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
-                                data-chart="satelliteChart" data-type="csv" title="下载图表数据">
-                            <i class="fa fa-table mr-1"></i>下载数据
-                        </button>
-                    </div>
-                </h3>
-                
-                <!-- 卫星名称筛选（图表专用） -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">卫星名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
+                    <div class="flex items-center gap-4">
+                        <!-- 卫星名称筛选（图表专用） -->
+                        <div class="dropdown-container relative" style="min-width: 160px;">
+                            <div class="flex items-center justify-between filter-select cursor-pointer text-sm" id="satelliteChartDropdown">
+                                <span id="satelliteChartDisplay" class="truncate" style="max-width: 120px;">请选择卫星名称</span>
+                                <i class="fa fa-chevron-down text-xs ml-2"></i>
+                            </div>
+                            <div class="selected-tags" id="satelliteChartTags"></div>
+                            <div class="dropdown-content hidden absolute top-full left-0 z-50" id="satelliteChartOptions" style="min-width: 200px;">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索卫星..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm" id="satelliteChartSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllSatelliteChart">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="satelliteChartList"></div>
+                            </div>
+                            <input type="hidden" id="satelliteChartValue" value="">
+                        </div>
+                        
                         <button id="resetSatelliteChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
                             <i class="fa fa-refresh mr-1"></i>重置筛选
                         </button>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="satelliteChartDropdown">
-                            <span id="satelliteChartDisplay">请选择卫星名称</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
+                        
+                        <!-- 分隔线 -->
+                        <div class="w-px h-6 bg-gray-300"></div>
+                        
+                        <div class="flex gap-2">
+                            <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                                <input type="checkbox" id="showSatelliteLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                                <span class="text-sm font-medium">显示数据标签</span>
+                            </label>
+                            <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
+                                    data-chart="satelliteChart" data-type="image" title="下载图表图片">
+                                <i class="fa fa-download mr-1"></i>下载图表
+                            </button>
+                            <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
+                                    data-chart="satelliteChart" data-type="csv" title="下载图表数据">
+                                <i class="fa fa-table mr-1"></i>下载数据
+                            </button>
                         </div>
-                        <div class="selected-tags" id="satelliteChartTags"></div>
-                        <div class="dropdown-content hidden" id="satelliteChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索卫星..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="satelliteChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllSatelliteChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="satelliteChartList"></div>
-                        </div>
-                        <input type="hidden" id="satelliteChartValue" value="">
                     </div>
-                </div>
+                </h3>
                 
                 <div class="chart-container">
                     <canvas id="satelliteChart"></canvas>
@@ -472,50 +471,49 @@
             <div class="bg-white rounded-lg p-6 card-shadow">
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>任务结果状态趋势分析</span>
-                    <div class="flex gap-2">
-                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <input type="checkbox" id="showStatusLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
-                            <span class="text-sm font-medium">显示数据标签</span>
-                        </label>
-                        <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
-                                data-chart="statusChart" data-type="image" title="下载图表图片">
-                            <i class="fa fa-download mr-1"></i>下载图表
-                        </button>
-                        <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
-                                data-chart="statusChart" data-type="csv" title="下载图表数据">
-                            <i class="fa fa-table mr-1"></i>下载数据
-                        </button>
-                    </div>
-                </h3>
-                
-                <!-- 任务结果状态筛选 -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">任务结果状态筛选 <span class="text-xs text-gray-500">(根据客户、卫星图表筛选自动过滤)</span></label>
+                    <div class="flex items-center gap-4">
+                        <!-- 任务结果状态筛选 -->
+                        <div class="dropdown-container relative" style="min-width: 160px;">
+                            <div class="flex items-center justify-between filter-select cursor-pointer text-sm" id="statusChartDropdown">
+                                <span id="statusChartDisplay" class="truncate" style="max-width: 120px;">请选择任务状态</span>
+                                <i class="fa fa-chevron-down text-xs ml-2"></i>
+                            </div>
+                            <div class="selected-tags" id="statusChartTags"></div>
+                            <div class="dropdown-content hidden absolute top-full left-0 z-50" id="statusChartOptions" style="min-width: 200px;">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索状态..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm" id="statusChartSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllStatusChart">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="statusChartList"></div>
+                            </div>
+                            <input type="hidden" id="statusChartValue" value="">
+                        </div>
+                        
                         <button id="resetStatusChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
                             <i class="fa fa-refresh mr-1"></i>重置筛选
                         </button>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="statusChartDropdown">
-                            <span id="statusChartDisplay">请选择任务状态</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
+                        
+                        <!-- 分隔线 -->
+                        <div class="w-px h-6 bg-gray-300"></div>
+                        
+                        <div class="flex gap-2">
+                            <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                                <input type="checkbox" id="showStatusLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                                <span class="text-sm font-medium">显示数据标签</span>
+                            </label>
+                            <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
+                                    data-chart="statusChart" data-type="image" title="下载图表图片">
+                                <i class="fa fa-download mr-1"></i>下载图表
+                            </button>
+                            <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
+                                    data-chart="statusChart" data-type="csv" title="下载图表数据">
+                                <i class="fa fa-table mr-1"></i>下载数据
+                            </button>
                         </div>
-                        <div class="selected-tags" id="statusChartTags"></div>
-                        <div class="dropdown-content hidden" id="statusChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索状态..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="statusChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllStatusChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="statusChartList"></div>
-                        </div>
-                        <input type="hidden" id="statusChartValue" value="">
                     </div>
-                </div>
+                </h3>
                 
                 <div class="chart-container">
                     <canvas id="statusChart"></canvas>
@@ -531,50 +529,49 @@
             <div class="bg-white rounded-lg p-6 card-shadow">
                 <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
                     <span>任务类型趋势分析</span>
-                    <div class="flex gap-2">
-                        <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
-                            <input type="checkbox" id="showTypeLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
-                            <span class="text-sm font-medium">显示数据标签</span>
-                        </label>
-                        <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
-                                data-chart="typeChart" data-type="image" title="下载图表图片">
-                            <i class="fa fa-download mr-1"></i>下载图表
-                        </button>
-                        <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
-                                data-chart="typeChart" data-type="csv" title="下载图表数据">
-                            <i class="fa fa-table mr-1"></i>下载数据
-                        </button>
-                    </div>
-                </h3>
-                
-                <!-- 任务类型筛选 -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">任务类型筛选 <span class="text-xs text-gray-500">(根据客户、卫星图表筛选自动过滤)</span></label>
+                    <div class="flex items-center gap-4">
+                        <!-- 任务类型筛选 -->
+                        <div class="dropdown-container relative" style="min-width: 160px;">
+                            <div class="flex items-center justify-between filter-select cursor-pointer text-sm" id="typeChartDropdown">
+                                <span id="typeChartDisplay" class="truncate" style="max-width: 120px;">请选择任务类型</span>
+                                <i class="fa fa-chevron-down text-xs ml-2"></i>
+                            </div>
+                            <div class="selected-tags" id="typeChartTags"></div>
+                            <div class="dropdown-content hidden absolute top-full left-0 z-50" id="typeChartOptions" style="min-width: 200px;">
+                                <div class="p-2">
+                                    <input type="text" placeholder="搜索类型..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm" id="typeChartSearch">
+                                </div>
+                                <div class="select-all-item" id="selectAllTypeChart">
+                                    <i class="fa fa-check-square-o mr-2"></i>全选
+                                </div>
+                                <div id="typeChartList"></div>
+                            </div>
+                            <input type="hidden" id="typeChartValue" value="">
+                        </div>
+                        
                         <button id="resetTypeChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
                             <i class="fa fa-refresh mr-1"></i>重置筛选
                         </button>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="typeChartDropdown">
-                            <span id="typeChartDisplay">请选择任务类型</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
+                        
+                        <!-- 分隔线 -->
+                        <div class="w-px h-6 bg-gray-300"></div>
+                        
+                        <div class="flex gap-2">
+                            <label class="flex items-center px-2 py-1 bg-secondary/10 text-secondary rounded cursor-pointer hover:bg-secondary/20 transition" title="点击显示/隐藏图表每个点的数值">
+                                <input type="checkbox" id="showTypeLabels" class="mr-2 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+                                <span class="text-sm font-medium">显示数据标签</span>
+                            </label>
+                            <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
+                                    data-chart="typeChart" data-type="image" title="下载图表图片">
+                                <i class="fa fa-download mr-1"></i>下载图表
+                            </button>
+                            <button class="chart-download-btn px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition"
+                                    data-chart="typeChart" data-type="csv" title="下载图表数据">
+                                <i class="fa fa-table mr-1"></i>下载数据
+                            </button>
                         </div>
-                        <div class="selected-tags" id="typeChartTags"></div>
-                        <div class="dropdown-content hidden" id="typeChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索类型..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="typeChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllTypeChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="typeChartList"></div>
-                        </div>
-                        <input type="hidden" id="typeChartValue" value="">
                     </div>
-                </div>
+                </h3>
                 
                 <div class="chart-container">
                     <canvas id="typeChart"></canvas>
