@@ -1552,6 +1552,8 @@
                     (values) => {
                         this.updateSatelliteOptions();
                         this.updateChartFilterOptions();
+                        this.updateStatusChartOptions();
+                        this.updateTypeChartOptions();
                     }
                 );
 
@@ -1561,6 +1563,8 @@
                     (values) => {
                         this.updateSatelliteOptions();
                         this.updateChartFilterOptions();
+                        this.updateStatusChartOptions();
+                        this.updateTypeChartOptions();
                     }
                 );
 
@@ -1570,6 +1574,8 @@
                     (values) => {
                         this.updateStatusOptions();
                         this.updateChartFilterOptions();
+                        this.updateStatusChartOptions();
+                        this.updateTypeChartOptions();
                     }
                 );
 
@@ -1579,6 +1585,7 @@
                     (values) => {
                         this.updateTypeOptions();
                         this.updateChartFilterOptions();
+                        this.updateTypeChartOptions(); // 状态改变时只需更新类型图表选项
                     }
                 );
 
@@ -1836,8 +1843,10 @@
                 const typeOptions = this.filterValues['任务类型'].map(type => ({ value: type, label: type }));
                 
                 this.satelliteChartSelect.setOptions(satelliteOptions);
-                this.statusChartSelect.setOptions(statusOptions);
-                this.typeChartSelect.setOptions(typeOptions);
+                
+                // 使用级联更新方法初始化底部筛选选项
+                this.updateStatusChartOptions();
+                this.updateTypeChartOptions();
 
                 // 初始化级联关系
                 this.updateChartFilterOptions();
@@ -2414,23 +2423,26 @@
             }
 
             updateStatusChartOptions() {
+                if (!this.data || !this.data.length) return;
+                
                 // 获取顶部筛选条件
                 const topStationValues = this.stationSelect.getSelectedValues();
                 const topCustomerValues = this.customerSelect.getSelectedValues();
                 const topSatelliteValues = this.satelliteSelect.getSelectedValues();
 
-                // 根据顶部筛选条件过滤数据，为状态图表提供可选的状态选项
+                // 根据顶部筛选条件（测站、客户、卫星）过滤数据，为状态图表提供可选的状态选项
                 const filteredForStatus = this.data.filter(item => {
                     const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
                     const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
                     const itemSatellite = (item[FIELD_MAPPING['卫星名称']] || '').toString().trim();
 
-                    // 只应用顶部筛选条件
+                    // 应用顶部筛选条件：测站、客户、卫星的级联筛选
                     return (!topStationValues.length || topStationValues.includes(itemStation)) &&
                            (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
                            (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite));
                 });
 
+                // 获取过滤后的可选状态
                 const availableStatuses = [...new Set(
                     filteredForStatus.map(item => (item[FIELD_MAPPING['任务结果状态']] || '').toString().trim()).filter(Boolean)
                 )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
@@ -2440,26 +2452,29 @@
             }
 
             updateTypeChartOptions() {
+                if (!this.data || !this.data.length) return;
+                
                 // 获取顶部筛选条件
                 const topStationValues = this.stationSelect.getSelectedValues();
                 const topCustomerValues = this.customerSelect.getSelectedValues();
                 const topSatelliteValues = this.satelliteSelect.getSelectedValues();
                 const topStatusValues = this.statusSelect.getSelectedValues();
 
-                // 根据顶部筛选条件过滤数据，为类型图表提供可选的类型选项
+                // 根据顶部筛选条件（测站、客户、卫星、状态）过滤数据，为类型图表提供可选的类型选项
                 const filteredForType = this.data.filter(item => {
                     const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
                     const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
                     const itemSatellite = (item[FIELD_MAPPING['卫星名称']] || '').toString().trim();
                     const itemStatus = (item[FIELD_MAPPING['任务结果状态']] || '').toString().trim();
 
-                    // 只应用顶部筛选条件
+                    // 应用顶部筛选条件：测站、客户、卫星、状态的级联筛选
                     return (!topStationValues.length || topStationValues.includes(itemStation)) &&
                            (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
                            (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite)) &&
                            (!topStatusValues.length || topStatusValues.includes(itemStatus));
                 });
 
+                // 获取过滤后的可选类型
                 const availableTypes = [...new Set(
                     filteredForType.map(item => (item[FIELD_MAPPING['任务类型']] || '').toString().trim()).filter(Boolean)
                 )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
