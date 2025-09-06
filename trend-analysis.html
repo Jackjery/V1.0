@@ -488,90 +488,6 @@
                     </div>
                 </h3>
                 
-                <!-- 测站名称筛选（图表专用） -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">测站名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                        <button id="resetStatusStationChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                            <i class="fa fa-refresh mr-1"></i>重置筛选
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="statusStationChartDropdown">
-                            <span id="statusStationChartDisplay">请选择测站名称</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="statusStationChartTags"></div>
-                        <div class="dropdown-content hidden" id="statusStationChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索测站..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="statusStationChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllStatusStationChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="statusStationChartList"></div>
-                        </div>
-                        <input type="hidden" id="statusStationChartValue" value="">
-                    </div>
-                </div>
-
-                <!-- 客户名称筛选（图表专用） -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">客户名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                        <button id="resetStatusCustomerChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                            <i class="fa fa-refresh mr-1"></i>重置筛选
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="statusCustomerChartDropdown">
-                            <span id="statusCustomerChartDisplay">请选择客户名称</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="statusCustomerChartTags"></div>
-                        <div class="dropdown-content hidden" id="statusCustomerChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索客户..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="statusCustomerChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllStatusCustomerChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="statusCustomerChartList"></div>
-                        </div>
-                        <input type="hidden" id="statusCustomerChartValue" value="">
-                    </div>
-                </div>
-
-                <!-- 卫星名称筛选（图表专用） -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">卫星名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                        <button id="resetStatusSatelliteChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                            <i class="fa fa-refresh mr-1"></i>重置筛选
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="statusSatelliteChartDropdown">
-                            <span id="statusSatelliteChartDisplay">请选择卫星名称</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="statusSatelliteChartTags"></div>
-                        <div class="dropdown-content hidden" id="statusSatelliteChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索卫星..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="statusSatelliteChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllStatusSatelliteChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="statusSatelliteChartList"></div>
-                        </div>
-                        <input type="hidden" id="statusSatelliteChartValue" value="">
-                    </div>
-                </div>
-
                 <!-- 任务结果状态筛选（图表专用） -->
                 <div class="mb-4">
                     <div class="flex items-center justify-between mb-2">
@@ -630,118 +546,6 @@
                     </div>
                 </h3>
                 
-                <!-- 测站名称筛选（图表专用） -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">测站名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                        <button id="resetTypeStationChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                            <i class="fa fa-refresh mr-1"></i>重置筛选
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="typeStationChartDropdown">
-                            <span id="typeStationChartDisplay">请选择测站名称</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="typeStationChartTags"></div>
-                        <div class="dropdown-content hidden" id="typeStationChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索测站..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="typeStationChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllTypeStationChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="typeStationChartList"></div>
-                        </div>
-                        <input type="hidden" id="typeStationChartValue" value="">
-                    </div>
-                </div>
-
-                <!-- 客户名称筛选（图表专用） -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">客户名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                        <button id="resetTypeCustomerChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                            <i class="fa fa-refresh mr-1"></i>重置筛选
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="typeCustomerChartDropdown">
-                            <span id="typeCustomerChartDisplay">请选择客户名称</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="typeCustomerChartTags"></div>
-                        <div class="dropdown-content hidden" id="typeCustomerChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索客户..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="typeCustomerChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllTypeCustomerChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="typeCustomerChartList"></div>
-                        </div>
-                        <input type="hidden" id="typeCustomerChartValue" value="">
-                    </div>
-                </div>
-
-                <!-- 卫星名称筛选（图表专用） -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">卫星名称筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                        <button id="resetTypeSatelliteChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                            <i class="fa fa-refresh mr-1"></i>重置筛选
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="typeSatelliteChartDropdown">
-                            <span id="typeSatelliteChartDisplay">请选择卫星名称</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="typeSatelliteChartTags"></div>
-                        <div class="dropdown-content hidden" id="typeSatelliteChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索卫星..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="typeSatelliteChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllTypeSatelliteChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="typeSatelliteChartList"></div>
-                        </div>
-                        <input type="hidden" id="typeSatelliteChartValue" value="">
-                    </div>
-                </div>
-
-                <!-- 任务结果状态筛选（图表专用） -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">任务结果状态筛选 <span class="text-xs text-gray-500">(可多选，可搜索)</span></label>
-                        <button id="resetTypeStatusChart" class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition" title="重置当前图表筛选">
-                            <i class="fa fa-refresh mr-1"></i>重置筛选
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center justify-between filter-select cursor-pointer" id="typeStatusChartDropdown">
-                            <span id="typeStatusChartDisplay">请选择任务结果状态</span>
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                        <div class="selected-tags" id="typeStatusChartTags"></div>
-                        <div class="dropdown-content hidden" id="typeStatusChartOptions">
-                            <div class="p-2">
-                                <input type="text" placeholder="搜索状态..." class="w-full px-3 py-1 border border-gray-300 rounded text-sm"
-                                       id="typeStatusChartSearch">
-                            </div>
-                            <div class="select-all-item" id="selectAllTypeStatusChart">
-                                <i class="fa fa-check-square-o mr-2"></i>全选
-                            </div>
-                            <div id="typeStatusChartList"></div>
-                        </div>
-                        <input type="hidden" id="typeStatusChartValue" value="">
-                    </div>
-                </div>
-
                 <!-- 任务类型筛选（图表专用） -->
                 <div class="mb-4">
                     <div class="flex items-center justify-between mb-2">
@@ -1811,76 +1615,11 @@
                     }
                 );
 
-                // 任务结果状态趋势分析的筛选组件
-                this.statusStationChartSelect = new MultiSelectDropdown(
-                    'statusStationChartDropdown', 'statusStationChartOptions', 'statusStationChartDisplay',
-                    'statusStationChartValue', 'statusStationChartTags', 'statusStationChartSearch', 'selectAllStatusStationChart',
-                    (values) => {
-                        this.updateStatusCustomerChartOptions();
-                        this.generateStatusChartWithFilter();
-                    }
-                );
-
-                this.statusCustomerChartSelect = new MultiSelectDropdown(
-                    'statusCustomerChartDropdown', 'statusCustomerChartOptions', 'statusCustomerChartDisplay',
-                    'statusCustomerChartValue', 'statusCustomerChartTags', 'statusCustomerChartSearch', 'selectAllStatusCustomerChart',
-                    (values) => {
-                        this.updateStatusSatelliteChartOptions();
-                        this.generateStatusChartWithFilter();
-                    }
-                );
-
-                this.statusSatelliteChartSelect = new MultiSelectDropdown(
-                    'statusSatelliteChartDropdown', 'statusSatelliteChartOptions', 'statusSatelliteChartDisplay',
-                    'statusSatelliteChartValue', 'statusSatelliteChartTags', 'statusSatelliteChartSearch', 'selectAllStatusSatelliteChart',
-                    (values) => {
-                        this.updateStatusStatusChartOptions();
-                        this.generateStatusChartWithFilter();
-                    }
-                );
-
                 this.statusChartSelect = new MultiSelectDropdown(
                     'statusChartDropdown', 'statusChartOptions', 'statusChartDisplay',
                     'statusChartValue', 'statusChartTags', 'statusChartSearch', 'selectAllStatusChart',
                     (values) => {
                         this.generateStatusChartWithFilter();
-                    }
-                );
-
-                // 任务类型趋势分析的筛选组件
-                this.typeStationChartSelect = new MultiSelectDropdown(
-                    'typeStationChartDropdown', 'typeStationChartOptions', 'typeStationChartDisplay',
-                    'typeStationChartValue', 'typeStationChartTags', 'typeStationChartSearch', 'selectAllTypeStationChart',
-                    (values) => {
-                        this.updateTypeCustomerChartOptions();
-                        this.generateTypeChartWithFilter();
-                    }
-                );
-
-                this.typeCustomerChartSelect = new MultiSelectDropdown(
-                    'typeCustomerChartDropdown', 'typeCustomerChartOptions', 'typeCustomerChartDisplay',
-                    'typeCustomerChartValue', 'typeCustomerChartTags', 'typeCustomerChartSearch', 'selectAllTypeCustomerChart',
-                    (values) => {
-                        this.updateTypeSatelliteChartOptions();
-                        this.generateTypeChartWithFilter();
-                    }
-                );
-
-                this.typeSatelliteChartSelect = new MultiSelectDropdown(
-                    'typeSatelliteChartDropdown', 'typeSatelliteChartOptions', 'typeSatelliteChartDisplay',
-                    'typeSatelliteChartValue', 'typeSatelliteChartTags', 'typeSatelliteChartSearch', 'selectAllTypeSatelliteChart',
-                    (values) => {
-                        this.updateTypeStatusChartOptions();
-                        this.generateTypeChartWithFilter();
-                    }
-                );
-
-                this.typeStatusChartSelect = new MultiSelectDropdown(
-                    'typeStatusChartDropdown', 'typeStatusChartOptions', 'typeStatusChartDisplay',
-                    'typeStatusChartValue', 'typeStatusChartTags', 'typeStatusChartSearch', 'selectAllTypeStatusChart',
-                    (values) => {
-                        this.updateTypeTypeChartOptions();
-                        this.generateTypeChartWithFilter();
                     }
                 );
 
@@ -1942,16 +1681,7 @@
                     { id: 'resetCustomerChart', selector: 'customerChartSelect', generator: () => this.generateCustomerChartWithFilter() },
                     { id: 'resetSatelliteChart', selector: 'satelliteChartSelect', generator: () => this.generateSatelliteChartWithFilter() },
                     { id: 'resetStatusChart', selector: 'statusChartSelect', generator: () => this.generateStatusChartWithFilter() },
-                    { id: 'resetTypeChart', selector: 'typeChartSelect', generator: () => this.generateTypeChartWithFilter() },
-                    // 状态图表的专用重置按钮
-                    { id: 'resetStatusStationChart', selector: 'statusStationChartSelect', generator: () => this.generateStatusChartWithFilter() },
-                    { id: 'resetStatusCustomerChart', selector: 'statusCustomerChartSelect', generator: () => this.generateStatusChartWithFilter() },
-                    { id: 'resetStatusSatelliteChart', selector: 'statusSatelliteChartSelect', generator: () => this.generateStatusChartWithFilter() },
-                    // 类型图表的专用重置按钮
-                    { id: 'resetTypeStationChart', selector: 'typeStationChartSelect', generator: () => this.generateTypeChartWithFilter() },
-                    { id: 'resetTypeCustomerChart', selector: 'typeCustomerChartSelect', generator: () => this.generateTypeChartWithFilter() },
-                    { id: 'resetTypeSatelliteChart', selector: 'typeSatelliteChartSelect', generator: () => this.generateTypeChartWithFilter() },
-                    { id: 'resetTypeStatusChart', selector: 'typeStatusChartSelect', generator: () => this.generateTypeChartWithFilter() }
+                    { id: 'resetTypeChart', selector: 'typeChartSelect', generator: () => this.generateTypeChartWithFilter() }
                 ];
 
                 resetChartButtons.forEach(({ id, selector, generator }) => {
@@ -2106,18 +1836,7 @@
                 const typeOptions = this.filterValues['任务类型'].map(type => ({ value: type, label: type }));
                 
                 this.satelliteChartSelect.setOptions(satelliteOptions);
-                
-                // 初始化状态图表的筛选组件选项
-                this.statusStationChartSelect.setOptions(stationOptions);
-                this.statusCustomerChartSelect.setOptions(customerOptions);
-                this.statusSatelliteChartSelect.setOptions(satelliteOptions);
                 this.statusChartSelect.setOptions(statusOptions);
-                
-                // 初始化类型图表的筛选组件选项
-                this.typeStationChartSelect.setOptions(stationOptions);
-                this.typeCustomerChartSelect.setOptions(customerOptions);
-                this.typeSatelliteChartSelect.setOptions(satelliteOptions);
-                this.typeStatusChartSelect.setOptions(statusOptions);
                 this.typeChartSelect.setOptions(typeOptions);
 
                 // 初始化级联关系
@@ -2530,19 +2249,16 @@
                 const topStatusValues = this.statusSelect.getSelectedValues();
                 const topTypeValues = this.typeSelect.getSelectedValues();
                 
-                // 获取图表专用的筛选条件
-                const selectedStations = this.statusStationChartSelect.getSelectedValues();
-                const selectedCustomers = this.statusCustomerChartSelect.getSelectedValues();
-                const selectedSatellites = this.statusSatelliteChartSelect.getSelectedValues();
+                // 获取图表专用的状态筛选
                 const selectedStatuses = this.statusChartSelect.getSelectedValues();
                 
-                // 应用完整的筛选逻辑，图表专用筛选优先，如果为空则使用顶部筛选
+                // 应用筛选逻辑：使用顶部筛选条件，但状态筛选以图表专用筛选为准
                 const filteredData = this.applyFiltersToData(this.data, {
                     startDate: startInput,
                     endDate: endInput,
-                    stations: selectedStations.length > 0 ? selectedStations : topStationValues,
-                    customers: selectedCustomers.length > 0 ? selectedCustomers : topCustomerValues,
-                    satellites: selectedSatellites.length > 0 ? selectedSatellites : topSatelliteValues,
+                    stations: topStationValues,
+                    customers: topCustomerValues,
+                    satellites: topSatelliteValues,
                     statuses: selectedStatuses.length > 0 ? selectedStatuses : topStatusValues,
                     types: topTypeValues
                 });
@@ -2563,21 +2279,17 @@
                 const topStatusValues = this.statusSelect.getSelectedValues();
                 const topTypeValues = this.typeSelect.getSelectedValues();
                 
-                // 获取图表专用的筛选条件
-                const selectedStations = this.typeStationChartSelect.getSelectedValues();
-                const selectedCustomers = this.typeCustomerChartSelect.getSelectedValues();
-                const selectedSatellites = this.typeSatelliteChartSelect.getSelectedValues();
-                const selectedStatuses = this.typeStatusChartSelect.getSelectedValues();
+                // 获取图表专用的类型筛选
                 const selectedTypes = this.typeChartSelect.getSelectedValues();
                 
-                // 应用完整的筛选逻辑，图表专用筛选优先，如果为空则使用顶部筛选
+                // 应用筛选逻辑：使用顶部筛选条件，但类型筛选以图表专用筛选为准
                 const filteredData = this.applyFiltersToData(this.data, {
                     startDate: startInput,
                     endDate: endInput,
-                    stations: selectedStations.length > 0 ? selectedStations : topStationValues,
-                    customers: selectedCustomers.length > 0 ? selectedCustomers : topCustomerValues,
-                    satellites: selectedSatellites.length > 0 ? selectedSatellites : topSatelliteValues,
-                    statuses: selectedStatuses.length > 0 ? selectedStatuses : topStatusValues,
+                    stations: topStationValues,
+                    customers: topCustomerValues,
+                    satellites: topSatelliteValues,
+                    statuses: topStatusValues,
                     types: selectedTypes.length > 0 ? selectedTypes : topTypeValues
                 });
                 
@@ -2702,38 +2414,21 @@
             }
 
             updateStatusChartOptions() {
-                this.resetChartSubsequentFilters('status');
-
                 // 获取顶部筛选条件
                 const topStationValues = this.stationSelect.getSelectedValues();
                 const topCustomerValues = this.customerSelect.getSelectedValues();
                 const topSatelliteValues = this.satelliteSelect.getSelectedValues();
-                const topStatusValues = this.statusSelect.getSelectedValues();
-                const topTypeValues = this.typeSelect.getSelectedValues();
 
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.stationChartSelect.getSelectedValues();
-                const chartCustomerValues = this.customerChartSelect.getSelectedValues();
-                const chartSatelliteValues = this.satelliteChartSelect.getSelectedValues();
-
+                // 根据顶部筛选条件过滤数据，为状态图表提供可选的状态选项
                 const filteredForStatus = this.data.filter(item => {
                     const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
                     const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
                     const itemSatellite = (item[FIELD_MAPPING['卫星名称']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if (topStationValues.length && !topStationValues.includes(itemStation)) return false;
-                    if (topCustomerValues.length && !topCustomerValues.includes(itemCustomer)) return false;
-                    if (topSatelliteValues.length && !topSatelliteValues.includes(itemSatellite)) return false;
-                    if (topStatusValues.length && !topStatusValues.includes((item[FIELD_MAPPING['任务结果状态']] || '').toString().trim())) return false;
-                    if (topTypeValues.length && !topTypeValues.includes((item[FIELD_MAPPING['任务类型']] || '').toString().trim())) return false;
-                    
-                    // 应用图表专用筛选条件
-                    if (chartStationValues.length && !chartStationValues.includes(itemStation)) return false;
-                    if (chartCustomerValues.length && !chartCustomerValues.includes(itemCustomer)) return false;
-                    if (chartSatelliteValues.length && !chartSatelliteValues.includes(itemSatellite)) return false;
-                    
-                    return true;
+
+                    // 只应用顶部筛选条件
+                    return (!topStationValues.length || topStationValues.includes(itemStation)) &&
+                           (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
+                           (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite));
                 });
 
                 const availableStatuses = [...new Set(
@@ -2745,41 +2440,24 @@
             }
 
             updateTypeChartOptions() {
-                this.resetChartSubsequentFilters('type');
-
                 // 获取顶部筛选条件
                 const topStationValues = this.stationSelect.getSelectedValues();
                 const topCustomerValues = this.customerSelect.getSelectedValues();
                 const topSatelliteValues = this.satelliteSelect.getSelectedValues();
                 const topStatusValues = this.statusSelect.getSelectedValues();
-                const topTypeValues = this.typeSelect.getSelectedValues();
 
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.stationChartSelect.getSelectedValues();
-                const chartCustomerValues = this.customerChartSelect.getSelectedValues();
-                const chartSatelliteValues = this.satelliteChartSelect.getSelectedValues();
-                const chartStatusValues = this.statusChartSelect.getSelectedValues();
-
+                // 根据顶部筛选条件过滤数据，为类型图表提供可选的类型选项
                 const filteredForType = this.data.filter(item => {
                     const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
                     const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
                     const itemSatellite = (item[FIELD_MAPPING['卫星名称']] || '').toString().trim();
                     const itemStatus = (item[FIELD_MAPPING['任务结果状态']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if (topStationValues.length && !topStationValues.includes(itemStation)) return false;
-                    if (topCustomerValues.length && !topCustomerValues.includes(itemCustomer)) return false;
-                    if (topSatelliteValues.length && !topSatelliteValues.includes(itemSatellite)) return false;
-                    if (topStatusValues.length && !topStatusValues.includes(itemStatus)) return false;
-                    if (topTypeValues.length && !topTypeValues.includes((item[FIELD_MAPPING['任务类型']] || '').toString().trim())) return false;
-                    
-                    // 应用图表专用筛选条件
-                    if (chartStationValues.length && !chartStationValues.includes(itemStation)) return false;
-                    if (chartCustomerValues.length && !chartCustomerValues.includes(itemCustomer)) return false;
-                    if (chartSatelliteValues.length && !chartSatelliteValues.includes(itemSatellite)) return false;
-                    if (chartStatusValues.length && !chartStatusValues.includes(itemStatus)) return false;
-                    
-                    return true;
+
+                    // 只应用顶部筛选条件
+                    return (!topStationValues.length || topStationValues.includes(itemStation)) &&
+                           (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
+                           (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite)) &&
+                           (!topStatusValues.length || topStatusValues.includes(itemStatus));
                 });
 
                 const availableTypes = [...new Set(
@@ -2790,292 +2468,6 @@
                 this.typeChartSelect.setOptions(typeOptions);
             }
 
-            // 状态趋势图表的级联更新方法
-            updateStatusCustomerChartOptions() {
-                this.resetStatusSubsequentFilters('customer');
-                
-                // 获取顶部筛选条件
-                const topStationValues = this.stationSelect.getSelectedValues();
-                const topCustomerValues = this.customerSelect.getSelectedValues();
-                
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.statusStationChartSelect.getSelectedValues();
-                
-                const filteredForCustomer = this.data.filter(item => {
-                    const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if (!topStationValues.length || topStationValues.includes(itemStation)) {
-                        // 应用图表专用筛选条件
-                        if (chartStationValues.length === 0 || chartStationValues.includes(itemStation)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-
-                const availableCustomers = [...new Set(
-                    filteredForCustomer.map(item => (item[FIELD_MAPPING['客户名称']] || '').toString().trim()).filter(Boolean)
-                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-
-                const customerOptions = availableCustomers.map(customer => ({ value: customer, label: customer }));
-                this.statusCustomerChartSelect.setOptions(customerOptions);
-            }
-
-            updateStatusSatelliteChartOptions() {
-                this.resetStatusSubsequentFilters('satellite');
-                
-                // 获取顶部筛选条件
-                const topStationValues = this.stationSelect.getSelectedValues();
-                const topCustomerValues = this.customerSelect.getSelectedValues();
-                const topSatelliteValues = this.satelliteSelect.getSelectedValues();
-                
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.statusStationChartSelect.getSelectedValues();
-                const chartCustomerValues = this.statusCustomerChartSelect.getSelectedValues();
-                
-                const filteredForSatellite = this.data.filter(item => {
-                    const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
-                    const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if ((!topStationValues.length || topStationValues.includes(itemStation)) &&
-                        (!topCustomerValues.length || topCustomerValues.includes(itemCustomer))) {
-                        // 应用图表专用筛选条件
-                        if ((chartStationValues.length === 0 || chartStationValues.includes(itemStation)) &&
-                            (chartCustomerValues.length === 0 || chartCustomerValues.includes(itemCustomer))) {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-
-                const availableSatellites = [...new Set(
-                    filteredForSatellite.map(item => (item[FIELD_MAPPING['卫星名称']] || '').toString().trim()).filter(Boolean)
-                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-
-                const satelliteOptions = availableSatellites.map(satellite => ({ value: satellite, label: satellite }));
-                this.statusSatelliteChartSelect.setOptions(satelliteOptions);
-            }
-
-            updateStatusStatusChartOptions() {
-                // 获取顶部筛选条件
-                const topStationValues = this.stationSelect.getSelectedValues();
-                const topCustomerValues = this.customerSelect.getSelectedValues();
-                const topSatelliteValues = this.satelliteSelect.getSelectedValues();
-                const topStatusValues = this.statusSelect.getSelectedValues();
-                
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.statusStationChartSelect.getSelectedValues();
-                const chartCustomerValues = this.statusCustomerChartSelect.getSelectedValues();
-                const chartSatelliteValues = this.statusSatelliteChartSelect.getSelectedValues();
-                
-                const filteredForStatus = this.data.filter(item => {
-                    const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
-                    const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
-                    const itemSatellite = (item[FIELD_MAPPING['卫星名称']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if ((!topStationValues.length || topStationValues.includes(itemStation)) &&
-                        (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
-                        (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite))) {
-                        // 应用图表专用筛选条件
-                        if ((chartStationValues.length === 0 || chartStationValues.includes(itemStation)) &&
-                            (chartCustomerValues.length === 0 || chartCustomerValues.includes(itemCustomer)) &&
-                            (chartSatelliteValues.length === 0 || chartSatelliteValues.includes(itemSatellite))) {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-
-                const availableStatuses = [...new Set(
-                    filteredForStatus.map(item => (item[FIELD_MAPPING['任务结果状态']] || '').toString().trim()).filter(Boolean)
-                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-
-                const statusOptions = availableStatuses.map(status => ({ value: status, label: status }));
-                this.statusChartSelect.setOptions(statusOptions);
-            }
-
-            // 类型趋势图表的级联更新方法
-            updateTypeCustomerChartOptions() {
-                this.resetTypeSubsequentFilters('customer');
-                
-                // 获取顶部筛选条件
-                const topStationValues = this.stationSelect.getSelectedValues();
-                const topCustomerValues = this.customerSelect.getSelectedValues();
-                
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.typeStationChartSelect.getSelectedValues();
-                
-                const filteredForCustomer = this.data.filter(item => {
-                    const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if (!topStationValues.length || topStationValues.includes(itemStation)) {
-                        // 应用图表专用筛选条件
-                        if (chartStationValues.length === 0 || chartStationValues.includes(itemStation)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-
-                const availableCustomers = [...new Set(
-                    filteredForCustomer.map(item => (item[FIELD_MAPPING['客户名称']] || '').toString().trim()).filter(Boolean)
-                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-
-                const customerOptions = availableCustomers.map(customer => ({ value: customer, label: customer }));
-                this.typeCustomerChartSelect.setOptions(customerOptions);
-            }
-
-            updateTypeSatelliteChartOptions() {
-                this.resetTypeSubsequentFilters('satellite');
-                
-                // 获取顶部筛选条件
-                const topStationValues = this.stationSelect.getSelectedValues();
-                const topCustomerValues = this.customerSelect.getSelectedValues();
-                const topSatelliteValues = this.satelliteSelect.getSelectedValues();
-                
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.typeStationChartSelect.getSelectedValues();
-                const chartCustomerValues = this.typeCustomerChartSelect.getSelectedValues();
-                
-                const filteredForSatellite = this.data.filter(item => {
-                    const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
-                    const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if ((!topStationValues.length || topStationValues.includes(itemStation)) &&
-                        (!topCustomerValues.length || topCustomerValues.includes(itemCustomer))) {
-                        // 应用图表专用筛选条件
-                        if ((chartStationValues.length === 0 || chartStationValues.includes(itemStation)) &&
-                            (chartCustomerValues.length === 0 || chartCustomerValues.includes(itemCustomer))) {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-
-                const availableSatellites = [...new Set(
-                    filteredForSatellite.map(item => (item[FIELD_MAPPING['卫星名称']] || '').toString().trim()).filter(Boolean)
-                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-
-                const satelliteOptions = availableSatellites.map(satellite => ({ value: satellite, label: satellite }));
-                this.typeSatelliteChartSelect.setOptions(satelliteOptions);
-            }
-
-            updateTypeStatusChartOptions() {
-                this.resetTypeSubsequentFilters('status');
-                
-                // 获取顶部筛选条件
-                const topStationValues = this.stationSelect.getSelectedValues();
-                const topCustomerValues = this.customerSelect.getSelectedValues();
-                const topSatelliteValues = this.satelliteSelect.getSelectedValues();
-                const topStatusValues = this.statusSelect.getSelectedValues();
-                
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.typeStationChartSelect.getSelectedValues();
-                const chartCustomerValues = this.typeCustomerChartSelect.getSelectedValues();
-                const chartSatelliteValues = this.typeSatelliteChartSelect.getSelectedValues();
-                
-                const filteredForStatus = this.data.filter(item => {
-                    const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
-                    const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
-                    const itemSatellite = (item[FIELD_MAPPING['卫星名称']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if ((!topStationValues.length || topStationValues.includes(itemStation)) &&
-                        (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
-                        (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite))) {
-                        // 应用图表专用筛选条件
-                        if ((chartStationValues.length === 0 || chartStationValues.includes(itemStation)) &&
-                            (chartCustomerValues.length === 0 || chartCustomerValues.includes(itemCustomer)) &&
-                            (chartSatelliteValues.length === 0 || chartSatelliteValues.includes(itemSatellite))) {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-
-                const availableStatuses = [...new Set(
-                    filteredForStatus.map(item => (item[FIELD_MAPPING['任务结果状态']] || '').toString().trim()).filter(Boolean)
-                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-
-                const statusOptions = availableStatuses.map(status => ({ value: status, label: status }));
-                this.typeStatusChartSelect.setOptions(statusOptions);
-            }
-
-            updateTypeTypeChartOptions() {
-                // 获取顶部筛选条件
-                const topStationValues = this.stationSelect.getSelectedValues();
-                const topCustomerValues = this.customerSelect.getSelectedValues();
-                const topSatelliteValues = this.satelliteSelect.getSelectedValues();
-                const topStatusValues = this.statusSelect.getSelectedValues();
-                const topTypeValues = this.typeSelect.getSelectedValues();
-                
-                // 获取当前图表的筛选条件
-                const chartStationValues = this.typeStationChartSelect.getSelectedValues();
-                const chartCustomerValues = this.typeCustomerChartSelect.getSelectedValues();
-                const chartSatelliteValues = this.typeSatelliteChartSelect.getSelectedValues();
-                const chartStatusValues = this.typeStatusChartSelect.getSelectedValues();
-                
-                const filteredForType = this.data.filter(item => {
-                    const itemStation = (item[FIELD_MAPPING['测站名称']] || '').toString().trim();
-                    const itemCustomer = (item[FIELD_MAPPING['客户名称']] || '').toString().trim();
-                    const itemSatellite = (item[FIELD_MAPPING['卫星名称']] || '').toString().trim();
-                    const itemStatus = (item[FIELD_MAPPING['任务结果状态']] || '').toString().trim();
-                    
-                    // 应用顶部筛选条件
-                    if ((!topStationValues.length || topStationValues.includes(itemStation)) &&
-                        (!topCustomerValues.length || topCustomerValues.includes(itemCustomer)) &&
-                        (!topSatelliteValues.length || topSatelliteValues.includes(itemSatellite)) &&
-                        (!topStatusValues.length || topStatusValues.includes(itemStatus))) {
-                        // 应用图表专用筛选条件
-                        if ((chartStationValues.length === 0 || chartStationValues.includes(itemStation)) &&
-                            (chartCustomerValues.length === 0 || chartCustomerValues.includes(itemCustomer)) &&
-                            (chartSatelliteValues.length === 0 || chartSatelliteValues.includes(itemSatellite)) &&
-                            (chartStatusValues.length === 0 || chartStatusValues.includes(itemStatus))) {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-
-                const availableTypes = [...new Set(
-                    filteredForType.map(item => (item[FIELD_MAPPING['任务类型']] || '').toString().trim()).filter(Boolean)
-                )].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-
-                const typeOptions = availableTypes.map(type => ({ value: type, label: type }));
-                this.typeChartSelect.setOptions(typeOptions);
-            }
-
-            // 重置后续筛选器的辅助方法
-            resetStatusSubsequentFilters(after = '') {
-                const filterOrder = ['station', 'customer', 'satellite', 'status'];
-                const startIndex = after ? filterOrder.indexOf(after) + 1 : 1;
-
-                for (let i = startIndex; i < filterOrder.length; i++) {
-                    const filterType = filterOrder[i];
-                    const select = this[`status${filterType.charAt(0).toUpperCase() + filterType.slice(1)}ChartSelect`];
-                    if (select) {
-                        select.clearSelection();
-                    }
-                }
-            }
-
-            resetTypeSubsequentFilters(after = '') {
-                const filterOrder = ['station', 'customer', 'satellite', 'status', 'type'];
-                const startIndex = after ? filterOrder.indexOf(after) + 1 : 1;
-
-                for (let i = startIndex; i < filterOrder.length; i++) {
-                    const filterType = filterOrder[i];
-                    const select = this[`type${filterType.charAt(0).toUpperCase() + filterType.slice(1)}ChartSelect`];
-                    if (select) {
-                        select.clearSelection();
-                    }
-                }
-            }
 
             resetChartSubsequentFilters(after = '') {
                 const filterOrder = ['station', 'customer', 'satellite', 'status', 'type'];
@@ -3203,17 +2595,6 @@
                 if (this.satelliteChartSelect) this.satelliteChartSelect.clearSelection();
                 if (this.statusChartSelect) this.statusChartSelect.clearSelection();
                 if (this.typeChartSelect) this.typeChartSelect.clearSelection();
-                
-                // 重置状态图表的专用筛选
-                if (this.statusStationChartSelect) this.statusStationChartSelect.clearSelection();
-                if (this.statusCustomerChartSelect) this.statusCustomerChartSelect.clearSelection();
-                if (this.statusSatelliteChartSelect) this.statusSatelliteChartSelect.clearSelection();
-                
-                // 重置类型图表的专用筛选
-                if (this.typeStationChartSelect) this.typeStationChartSelect.clearSelection();
-                if (this.typeCustomerChartSelect) this.typeCustomerChartSelect.clearSelection();
-                if (this.typeSatelliteChartSelect) this.typeSatelliteChartSelect.clearSelection();
-                if (this.typeStatusChartSelect) this.typeStatusChartSelect.clearSelection();
 
                 document.getElementById('startDate').value = '';
                 document.getElementById('endDate').value = '';
