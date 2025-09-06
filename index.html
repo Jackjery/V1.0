@@ -318,6 +318,34 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 新增：卫星数量卡片 -->
+            <div class="stat-card bg-white rounded-lg p-6 card-shadow cursor-pointer" id="satelliteCountCard">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">卫星数量</p>
+                        <h3 class="text-3xl font-bold text-blue-600 mt-2" id="satelliteCount">0</h3>
+                        <p class="text-xs text-gray-400 mt-1">点击查看趋势图</p>
+                    </div>
+                    <div class="p-3 bg-blue-600/10 rounded-lg">
+                        <i class="fa fa-rocket text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 新增：客户数量卡片 -->
+            <div class="stat-card bg-white rounded-lg p-6 card-shadow cursor-pointer" id="customerCountCard">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">客户数量</p>
+                        <h3 class="text-3xl font-bold text-purple-600 mt-2" id="customerCount">0</h3>
+                        <p class="text-xs text-gray-400 mt-1">点击查看趋势图</p>
+                    </div>
+                    <div class="p-3 bg-purple-600/10 rounded-lg">
+                        <i class="fa fa-users text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- 详细数据表格 -->
@@ -339,6 +367,70 @@
             </div>
         </section>
     </main>
+
+    <!-- 卫星数量趋势图模态框 -->
+    <div id="satelliteCountModal" class="fixed inset-0 bg-black/50 modal-backdrop flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg w-full max-w-4xl mx-4 p-6 transform transition-all scale-95 opacity-0" id="satelliteModalContent">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">卫星数量趋势分析</h3>
+                <button id="closeSatelliteModal" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="h-96 border border-gray-200 rounded-lg p-4 relative">
+                <canvas id="satelliteCountChart"></canvas>
+                
+                <!-- 空状态提示 -->
+                <div id="satelliteChartEmpty" class="absolute inset-0 flex items-center justify-center text-gray-500 hidden">
+                    <div class="text-center">
+                        <i class="fa fa-rocket text-4xl mb-2"></i>
+                        <p>没有卫星数据可显示</p>
+                    </div>
+                </div>
+                
+                <!-- 加载状态 -->
+                <div id="satelliteChartLoading" class="absolute inset-0 flex items-center justify-center bg-white/80 hidden">
+                    <div class="text-center">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-2"></div>
+                        <p>正在统计卫星数量趋势...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 客户数量趋势图模态框 -->
+    <div id="customerCountModal" class="fixed inset-0 bg-black/50 modal-backdrop flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg w-full max-w-4xl mx-4 p-6 transform transition-all scale-95 opacity-0" id="customerModalContent">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">客户数量趋势分析</h3>
+                <button id="closeCustomerModal" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="h-96 border border-gray-200 rounded-lg p-4 relative">
+                <canvas id="customerCountChart"></canvas>
+                
+                <!-- 空状态提示 -->
+                <div id="customerChartEmpty" class="absolute inset-0 flex items-center justify-center text-gray-500 hidden">
+                    <div class="text-center">
+                        <i class="fa fa-users text-4xl mb-2"></i>
+                        <p>没有客户数据可显示</p>
+                    </div>
+                </div>
+                
+                <!-- 加载状态 -->
+                <div id="customerChartLoading" class="absolute inset-0 flex items-center justify-center bg-white/80 hidden">
+                    <div class="text-center">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mb-2"></div>
+                        <p>正在统计客户数量趋势...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 周期规则配置模态框 -->
     <div id="groupingConfigModal" class="fixed inset-0 bg-black/50 modal-backdrop flex items-center justify-center z-50 hidden">
@@ -985,6 +1077,12 @@
                 this.totalFailures = document.getElementById('totalFailures');
                 this.avgSuccessRate = document.getElementById('avgSuccessRate');
                 
+                // 新增：卫星和客户数量卡片
+                this.satelliteCount = document.getElementById('satelliteCount');
+                this.customerCount = document.getElementById('customerCount');
+                this.satelliteCountCard = document.getElementById('satelliteCountCard');
+                this.customerCountCard = document.getElementById('customerCountCard');
+                
                 // 详情表格相关
                 this.detailTableBody = document.getElementById('detailTableBody');
                 
@@ -1007,6 +1105,25 @@
                 
                 // 数据库加载状态
                 this.dbLoading = document.getElementById('dbLoading');
+                
+                // 新增：卫星和客户数量模态框相关
+                this.satelliteCountModal = document.getElementById('satelliteCountModal');
+                this.satelliteModalContent = document.getElementById('satelliteModalContent');
+                this.closeSatelliteModal = document.getElementById('closeSatelliteModal');
+                this.satelliteCountChart = document.getElementById('satelliteCountChart');
+                this.satelliteChartEmpty = document.getElementById('satelliteChartEmpty');
+                this.satelliteChartLoading = document.getElementById('satelliteChartLoading');
+                
+                this.customerCountModal = document.getElementById('customerCountModal');
+                this.customerModalContent = document.getElementById('customerModalContent');
+                this.closeCustomerModal = document.getElementById('closeCustomerModal');
+                this.customerCountChart = document.getElementById('customerCountChart');
+                this.customerChartEmpty = document.getElementById('customerChartEmpty');
+                this.customerChartLoading = document.getElementById('customerChartLoading');
+                
+                // 图表对象
+                this.satelliteChart = null;
+                this.customerChart = null;
             }
             
             // 绑定事件监听
@@ -1063,6 +1180,14 @@
                     // 结束时间与开始时间相同（次日）
                     this.dayEndDisplay.textContent = e.target.value;
                 });
+                
+                // 新增：卫星和客户数量卡片点击事件
+                this.satelliteCountCard.addEventListener('click', () => this.showSatelliteCountChart());
+                this.customerCountCard.addEventListener('click', () => this.showCustomerCountChart());
+                
+                // 新增：模态框关闭事件
+                this.closeSatelliteModal.addEventListener('click', () => this.closeSatelliteCountModal());
+                this.closeCustomerModal.addEventListener('click', () => this.closeCustomerCountModal());
             }
             
             // 初始化页面
@@ -1365,6 +1490,14 @@
                         this.chart.destroy();
                         this.chart = null;
                     }
+                    if (this.satelliteChart) {
+                        this.satelliteChart.destroy();
+                        this.satelliteChart = null;
+                    }
+                    if (this.customerChart) {
+                        this.customerChart.destroy();
+                        this.customerChart = null;
+                    }
                     this.chartEmptyState.classList.remove('hidden');
                     this.detailTableBody.innerHTML = '';
                     
@@ -1375,6 +1508,8 @@
                     this.minCount.textContent = '0';
                     this.totalFailures.textContent = '0';
                     this.avgSuccessRate.textContent = '0%';
+                    this.satelliteCount.textContent = '0';
+                    this.customerCount.textContent = '0';
                     
                     this.showSuccess('已清除所有数据');
                 } catch (error) {
@@ -1701,6 +1836,8 @@
                     this.minCount.textContent = '0';
                     this.totalFailures.textContent = '0';
                     this.avgSuccessRate.textContent = '0%';
+                    this.satelliteCount.textContent = '0';
+                    this.customerCount.textContent = '0';
                     return;
                 }
                 
@@ -1730,6 +1867,9 @@
                     ? (validRates.reduce((sum, rate) => sum + rate, 0) / validRates.length).toFixed(3) 
                     : 0;
                 this.avgSuccessRate.textContent = `${avgSuccessRate}%`;
+                
+                // 新增：计算卫星和客户数量
+                this.updateEntityCounts(stats);
             }
             
             // 更新详情表格
@@ -1902,6 +2042,511 @@
             // 格式化日期显示（文件时间）
             formatDateForDisplay(date) {
                 return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+            }
+            
+            // 新增：动态查找包含关键词的字段值
+            findFieldValue(item, keywords) {
+                // 首先尝试精确匹配
+                for (const keyword of keywords) {
+                    if (item[keyword] !== undefined && item[keyword] !== null && item[keyword] !== '') {
+                        return item[keyword];
+                    }
+                }
+                
+                // 然后尝试包含匹配
+                const itemKeys = Object.keys(item);
+                for (const keyword of keywords) {
+                    const matchingKey = itemKeys.find(key => 
+                        key.toLowerCase().includes(keyword.toLowerCase()) ||
+                        key.includes(keyword)
+                    );
+                    if (matchingKey && item[matchingKey] !== undefined && item[matchingKey] !== null && item[matchingKey] !== '') {
+                        return item[matchingKey];
+                    }
+                }
+                
+                return null;
+            }
+            
+            // 新增：更新卫星和客户实体数量统计
+            updateEntityCounts(stats) {
+                if (stats.length === 0) {
+                    this.satelliteCount.textContent = '0';
+                    this.customerCount.textContent = '0';
+                    return;
+                }
+                
+                // 收集所有周期的卫星和客户数据
+                const allSatellites = new Set();
+                const allCustomers = new Set();
+                
+                const { planIdField, startTimeField, taskResultField } = this.fieldMappingValues;
+                
+                // 调试：输出数据中的所有字段名
+                if (this.data && this.data.length > 0) {
+                    const sampleItem = this.data[0];
+                    console.log('数据字段名:', Object.keys(sampleItem));
+                    
+                    // 查找可能的卫星和客户字段
+                    const fieldsWithSatellite = Object.keys(sampleItem).filter(key => 
+                        key.toLowerCase().includes('satellite') || 
+                        key.includes('卫星') || 
+                        key.includes('星')
+                    );
+                    const fieldsWithCustomer = Object.keys(sampleItem).filter(key => 
+                        key.toLowerCase().includes('customer') || 
+                        key.toLowerCase().includes('client') || 
+                        key.includes('客户') || 
+                        key.includes('用户')
+                    );
+                    
+                    console.log('可能的卫星字段:', fieldsWithSatellite);
+                    console.log('可能的客户字段:', fieldsWithCustomer);
+                }
+                
+                if (this.data) {
+                    // 获取时间范围
+                    const groupType = this.groupBy.value;
+                    const range = this.computeDateRangeForGroup(groupType, this.startDate.value, this.endDate.value);
+                    const startDate = range.startDate;
+                    const endDate = range.endDate;
+                    
+                    this.data.forEach(item => {
+                        try {
+                            // 解析任务开始时间（严格基于文件时间）
+                            const timeValue = item[startTimeField];
+                            let date;
+                            
+                            if (timeValue instanceof Date) {
+                                date = this.cycleEngine.createFileDate(timeValue);
+                            } else if (typeof timeValue === 'string') {
+                                date = new Date(timeValue);
+                            } else if (typeof timeValue === 'number') {
+                                date = new Date((timeValue - 25569) * 86400000);
+                            } else {
+                                return;
+                            }
+                            
+                            // 验证日期有效性
+                            if (isNaN(date.getTime())) return;
+                            
+                            // 如果指定了日期范围，过滤不在范围内的数据
+                            if (startDate && date < startDate) return;
+                            if (endDate && date > endDate) return;
+                            
+                            // 收集卫星和客户信息 - 动态字段匹配
+                            const satellite = this.findFieldValue(item, ['satellite', '卫星', '星']);
+                            const customer = this.findFieldValue(item, ['customer', 'client', '客户', '用户']);
+                            
+                            if (satellite && satellite.toString().trim() !== '') {
+                                allSatellites.add(satellite.toString().trim());
+                            }
+                            if (customer && customer.toString().trim() !== '') {
+                                allCustomers.add(customer.toString().trim());
+                            }
+                            
+                            // 调试：记录找到的值
+                            if (allSatellites.size <= 5 && satellite) {
+                                console.log('找到卫星:', satellite);
+                            }
+                            if (allCustomers.size <= 5 && customer) {
+                                console.log('找到客户:', customer);
+                            }
+                        } catch (error) {
+                            console.warn('处理实体数据项失败:', item, error);
+                        }
+                    });
+                }
+                
+                // 更新显示
+                this.satelliteCount.textContent = allSatellites.size;
+                this.customerCount.textContent = allCustomers.size;
+                
+                // 调试：输出统计结果
+                console.log('卫星数量统计:', allSatellites.size, '个卫星:', Array.from(allSatellites).slice(0, 10));
+                console.log('客户数量统计:', allCustomers.size, '个客户:', Array.from(allCustomers).slice(0, 10));
+            }
+            
+            // 新增：显示卫星数量趋势图
+            showSatelliteCountChart() {
+                if (!this.data || !this.fieldMappingValues) {
+                    alert('请先导入数据并完成字段映射');
+                    return;
+                }
+                
+                // 显示模态框
+                this.satelliteCountModal.classList.remove('hidden');
+                setTimeout(() => {
+                    this.satelliteModalContent.classList.remove('scale-95', 'opacity-0');
+                    this.satelliteModalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+                
+                // 生成卫星数量趋势图
+                this.generateSatelliteCountChart();
+            }
+            
+            // 新增：显示客户数量趋势图
+            showCustomerCountChart() {
+                if (!this.data || !this.fieldMappingValues) {
+                    alert('请先导入数据并完成字段映射');
+                    return;
+                }
+                
+                // 显示模态框
+                this.customerCountModal.classList.remove('hidden');
+                setTimeout(() => {
+                    this.customerModalContent.classList.remove('scale-95', 'opacity-0');
+                    this.customerModalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+                
+                // 生成客户数量趋势图
+                this.generateCustomerCountChart();
+            }
+            
+            // 新增：关闭卫星数量模态框
+            closeSatelliteCountModal() {
+                this.satelliteModalContent.classList.remove('scale-100', 'opacity-100');
+                this.satelliteModalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    this.satelliteCountModal.classList.add('hidden');
+                }, 300);
+            }
+            
+            // 新增：关闭客户数量模态框
+            closeCustomerCountModal() {
+                this.customerModalContent.classList.remove('scale-100', 'opacity-100');
+                this.customerModalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    this.customerCountModal.classList.add('hidden');
+                }, 300);
+            }
+            
+            // 新增：生成卫星数量趋势图
+            generateSatelliteCountChart() {
+                // 显示加载状态
+                this.satelliteChartLoading.classList.remove('hidden');
+                this.satelliteChartEmpty.classList.add('hidden');
+                
+                try {
+                    // 如果已有图表，先销毁
+                    if (this.satelliteChart) {
+                        this.satelliteChart.destroy();
+                    }
+                    
+                    const groupType = this.groupBy.value;
+                    const range = this.computeDateRangeForGroup(groupType, this.startDate.value, this.endDate.value);
+                    const startDate = range.startDate;
+                    const endDate = range.endDate;
+                    
+                    // 按周期分组统计卫星数量
+                    const satelliteStats = this.groupSatelliteDataByCycle(groupType, startDate, endDate);
+                    
+                    if (satelliteStats.length === 0) {
+                        this.satelliteChartEmpty.classList.remove('hidden');
+                        return;
+                    }
+                    
+                    // 准备图表数据
+                    const labels = satelliteStats.map(stat => stat.label);
+                    const counts = satelliteStats.map(stat => stat.satelliteCount);
+                    
+                    // 创建图表
+                    const ctx = this.satelliteCountChart.getContext('2d');
+                    
+                    this.satelliteChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: '卫星数量',
+                                data: counts,
+                                borderColor: '#2563eb',
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.3,
+                                pointRadius: 6,
+                                pointBackgroundColor: '#2563eb',
+                                pointBorderColor: '#ffffff',
+                                pointBorderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: '卫星数量'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return `卫星数量: ${context.parsed.y}`;
+                                        }
+                                    }
+                                },
+                                datalabels: {
+                                    display: true,
+                                    color: '#2563eb',
+                                    font: {
+                                        size: 12,
+                                        weight: 'bold'
+                                    },
+                                    anchor: 'end',
+                                    align: 'top',
+                                    offset: 4
+                                }
+                            }
+                        }
+                    });
+                    
+                } catch (error) {
+                    console.error('生成卫星数量趋势图失败:', error);
+                    this.satelliteChartEmpty.classList.remove('hidden');
+                } finally {
+                    this.satelliteChartLoading.classList.add('hidden');
+                }
+            }
+            
+            // 新增：生成客户数量趋势图
+            generateCustomerCountChart() {
+                // 显示加载状态
+                this.customerChartLoading.classList.remove('hidden');
+                this.customerChartEmpty.classList.add('hidden');
+                
+                try {
+                    // 如果已有图表，先销毁
+                    if (this.customerChart) {
+                        this.customerChart.destroy();
+                    }
+                    
+                    const groupType = this.groupBy.value;
+                    const range = this.computeDateRangeForGroup(groupType, this.startDate.value, this.endDate.value);
+                    const startDate = range.startDate;
+                    const endDate = range.endDate;
+                    
+                    // 按周期分组统计客户数量
+                    const customerStats = this.groupCustomerDataByCycle(groupType, startDate, endDate);
+                    
+                    if (customerStats.length === 0) {
+                        this.customerChartEmpty.classList.remove('hidden');
+                        return;
+                    }
+                    
+                    // 准备图表数据
+                    const labels = customerStats.map(stat => stat.label);
+                    const counts = customerStats.map(stat => stat.customerCount);
+                    
+                    // 创建图表
+                    const ctx = this.customerCountChart.getContext('2d');
+                    
+                    this.customerChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: '客户数量',
+                                data: counts,
+                                borderColor: '#7c3aed',
+                                backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.3,
+                                pointRadius: 6,
+                                pointBackgroundColor: '#7c3aed',
+                                pointBorderColor: '#ffffff',
+                                pointBorderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: '客户数量'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return `客户数量: ${context.parsed.y}`;
+                                        }
+                                    }
+                                },
+                                datalabels: {
+                                    display: true,
+                                    color: '#7c3aed',
+                                    font: {
+                                        size: 12,
+                                        weight: 'bold'
+                                    },
+                                    anchor: 'end',
+                                    align: 'top',
+                                    offset: 4
+                                }
+                            }
+                        }
+                    });
+                    
+                } catch (error) {
+                    console.error('生成客户数量趋势图失败:', error);
+                    this.customerChartEmpty.classList.remove('hidden');
+                } finally {
+                    this.customerChartLoading.classList.add('hidden');
+                }
+            }
+            
+            // 新增：按周期分组卫星数据
+            groupSatelliteDataByCycle(groupType, startDate, endDate) {
+                const groups = {};
+                const { planIdField, startTimeField, taskResultField } = this.fieldMappingValues;
+                
+                this.data.forEach(item => {
+                    try {
+                        // 解析任务开始时间
+                        const timeValue = item[startTimeField];
+                        let date;
+                        
+                        if (timeValue instanceof Date) {
+                            date = this.cycleEngine.createFileDate(timeValue);
+                        } else if (typeof timeValue === 'string') {
+                            date = new Date(timeValue);
+                        } else if (typeof timeValue === 'number') {
+                            date = new Date((timeValue - 25569) * 86400000);
+                        } else {
+                            return;
+                        }
+                        
+                        // 验证日期有效性
+                        if (isNaN(date.getTime())) return;
+                        
+                        // 如果指定了日期范围，过滤不在范围内的数据
+                        if (startDate && date < startDate) return;
+                        if (endDate && date > endDate) return;
+                        
+                        // 获取周期组信息
+                        const groupInfo = this.cycleEngine.getGroup(date, groupType);
+                        
+                        // 如果该组不存在，则初始化
+                        if (!groups[groupInfo.key]) {
+                            groups[groupInfo.key] = {
+                                key: groupInfo.key,
+                                label: groupInfo.label,
+                                satellites: new Set(),
+                                rangeStart: groupInfo.rangeStart,
+                                rangeEnd: groupInfo.rangeEnd
+                            };
+                        }
+                        
+                        // 收集卫星信息 - 动态字段匹配
+                        const satellite = this.findFieldValue(item, ['satellite', '卫星', '星']);
+                        if (satellite && satellite.toString().trim() !== '') {
+                            groups[groupInfo.key].satellites.add(satellite.toString().trim());
+                        }
+                        
+                    } catch (error) {
+                        console.warn('处理卫星数据项失败:', item, error);
+                    }
+                });
+                
+                // 转换为数组并按时间排序
+                const statsArray = Object.values(groups).sort((a, b) => {
+                    return a.rangeStart - b.rangeStart;
+                });
+                
+                // 计算每个周期的卫星数量
+                statsArray.forEach(stat => {
+                    stat.satelliteCount = stat.satellites.size;
+                });
+                
+                return statsArray;
+            }
+            
+            // 新增：按周期分组客户数据
+            groupCustomerDataByCycle(groupType, startDate, endDate) {
+                const groups = {};
+                const { planIdField, startTimeField, taskResultField } = this.fieldMappingValues;
+                
+                this.data.forEach(item => {
+                    try {
+                        // 解析任务开始时间
+                        const timeValue = item[startTimeField];
+                        let date;
+                        
+                        if (timeValue instanceof Date) {
+                            date = this.cycleEngine.createFileDate(timeValue);
+                        } else if (typeof timeValue === 'string') {
+                            date = new Date(timeValue);
+                        } else if (typeof timeValue === 'number') {
+                            date = new Date((timeValue - 25569) * 86400000);
+                        } else {
+                            return;
+                        }
+                        
+                        // 验证日期有效性
+                        if (isNaN(date.getTime())) return;
+                        
+                        // 如果指定了日期范围，过滤不在范围内的数据
+                        if (startDate && date < startDate) return;
+                        if (endDate && date > endDate) return;
+                        
+                        // 获取周期组信息
+                        const groupInfo = this.cycleEngine.getGroup(date, groupType);
+                        
+                        // 如果该组不存在，则初始化
+                        if (!groups[groupInfo.key]) {
+                            groups[groupInfo.key] = {
+                                key: groupInfo.key,
+                                label: groupInfo.label,
+                                customers: new Set(),
+                                rangeStart: groupInfo.rangeStart,
+                                rangeEnd: groupInfo.rangeEnd
+                            };
+                        }
+                        
+                        // 收集客户信息 - 动态字段匹配
+                        const customer = this.findFieldValue(item, ['customer', 'client', '客户', '用户']);
+                        if (customer && customer.toString().trim() !== '') {
+                            groups[groupInfo.key].customers.add(customer.toString().trim());
+                        }
+                        
+                    } catch (error) {
+                        console.warn('处理客户数据项失败:', item, error);
+                    }
+                });
+                
+                // 转换为数组并按时间排序
+                const statsArray = Object.values(groups).sort((a, b) => {
+                    return a.rangeStart - b.rangeStart;
+                });
+                
+                // 计算每个周期的客户数量
+                statsArray.forEach(stat => {
+                    stat.customerCount = stat.customers.size;
+                });
+                
+                return statsArray;
             }
         }
 
