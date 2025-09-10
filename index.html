@@ -200,7 +200,12 @@
 
         <!-- 图表展示区 -->
         <section class="bg-white rounded-lg p-6 card-shadow mb-8">
-            <h2 class="text-lg font-semibold mb-4">计划ID计数与任务状态趋势图</h2>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold">计划ID计数与任务状态趋势图</h2>
+                <button id="downloadChartData" class="px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 transition-colors text-sm flex items-center">
+                    <i class="fa fa-download mr-1"></i>下载数据
+                </button>
+            </div>
 
             <div class="h-96 border border-gray-200 rounded-lg p-4 relative">
                 <!-- 图表容器 -->
@@ -1124,6 +1129,12 @@
                 // 图表对象
                 this.satelliteChart = null;
                 this.customerChart = null;
+                
+                // 数据下载按钮
+                this.downloadChartData = document.getElementById('downloadChartData');
+                
+                // 存储最后生成的统计数据，用于下载
+                this.lastStats = null;
             }
             
             // 绑定事件监听
@@ -1180,6 +1191,9 @@
                     // 结束时间与开始时间相同（次日）
                     this.dayEndDisplay.textContent = e.target.value;
                 });
+                
+                // 图表数据下载按钮
+                this.downloadChartData.addEventListener('click', () => this.downloadChartDataFile());
                 
                 // 新增：卫星和客户数量卡片点击事件
                 this.satelliteCountCard.addEventListener('click', () => this.showSatelliteCountChart());
@@ -1684,6 +1698,9 @@
             
             // 更新图表
             updateChart(stats, groupType) {
+                // 保存当前统计数据，供下载使用
+                this.lastStats = stats;
+                
                 // 如果已有图表，先销毁
                 if (this.chart) {
                     this.chart.destroy();
@@ -1755,6 +1772,11 @@
                             mode: 'index',
                             intersect: false,
                         },
+                        layout: {
+                            padding: {
+                                top: 20 // 增加顶部内边距，防止数据标签被遮挡
+                            }
+                        },
                         scales: {
                             y: {
                                 type: 'linear',
@@ -1782,6 +1804,9 @@
                             }
                         },
                         plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
                             tooltip: {
                                 callbacks: {
                                     label: function(context) {
@@ -1825,6 +1850,45 @@
                         }
                     }
                 });
+            }
+            
+            // 下载图表数据文件
+            downloadChartDataFile() {
+                if (!this.lastStats || this.lastStats.length === 0) {
+                    alert('暂无数据可下载，请先生成图表');
+                    return;
+                }
+                
+                // 准备CSV内容 - 第一列为时间，第二列开始分别是计划id数、成功率、失败圈次计数
+                let csvContent = '时间,计划id数,成功率(%),失败圈次计数\n';
+                
+                this.lastStats.forEach(stat => {
+                    // 确保所有数据都是有效的
+                    const time = stat.label || '';
+                    const planCount = stat.count || 0;
+                    const successRate = stat.successRate ? (parseFloat(stat.successRate.toFixed(3))) : 0;
+                    const failureCount = stat.failureCount || 0;
+                    
+                    csvContent += `${time},${planCount},${successRate},${failureCount}\n`;
+                });
+                
+                // 创建Blob对象
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                
+                // 创建下载链接
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                
+                // 设置文件名
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                link.setAttribute('href', url);
+                link.setAttribute('download', `计划ID计数与任务状态趋势图-${timestamp}.csv`);
+                link.style.visibility = 'hidden';
+                
+                // 添加到文档并触发下载
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             }
             
             // 更新统计卡片
